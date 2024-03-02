@@ -1,95 +1,43 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import { FC } from 'react';
+import Post from '@/components/Post';
+import { notFound } from 'next/navigation';
+import { getPagesCount, getPost } from '@/utils/posts';
+import { allArticles } from 'contentlayer/generated';
+import Link from 'next/link';
+import {
+  formatDate,
+  getSortedPosts,
+  getSortedPostsByPage,
+  getSortedPostsGroupedByYear,
+} from '@/utils/posts';
+import { PaginationControl } from '@/components/PaginationControl';
+import PostCard from '@/components/PostCard';
 
-export default function Home() {
+const perPage = 6;
+const pagesCount = getPagesCount(perPage);
+
+const Home: FC = () => {
+  const pageId = '1';
+  const posts = getSortedPostsByPage(Number(pageId), perPage);
+  const hasNextPage = pagesCount > 1;
+  const hasPrevPage = false;
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+    <div className='normal-container animate-main'>
+      <div className='mx-4 flex flex-col gap-8 pt-6'>
+        {posts.map((post) => {
+          return <PostCard key={post.slug} post={post} />;
+        })}
+        <PaginationControl
+          pageId={pageId}
+          pagePath='/page'
+          pagesCount={pagesCount}
+          hasNextPage={hasNextPage}
+          hasPrevPage={hasPrevPage}
         />
       </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </div>
   );
-}
+};
+
+export default Home;

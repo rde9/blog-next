@@ -1,107 +1,157 @@
-:root {
-  --max-width: 1100px;
-  --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
-    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
-    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+@layer base {
+  html {
+    @apply scroll-smooth;
+    background-color: var(--c-bg);
+  }
 
-  --primary-glow: conic-gradient(
-    from 180deg at 50% 50%,
-    #16abff33 0deg,
-    #0885ff33 55deg,
-    #54d6ff33 120deg,
-    #0071ff33 160deg,
-    transparent 360deg
-  );
-  --secondary-glow: radial-gradient(
-    rgba(255, 255, 255, 1),
-    rgba(255, 255, 255, 0)
-  );
-
-  --tile-start-rgb: 239, 245, 249;
-  --tile-end-rgb: 228, 232, 233;
-  --tile-border: conic-gradient(
-    #00000080,
-    #00000040,
-    #00000030,
-    #00000020,
-    #00000010,
-    #00000010,
-    #00000080
-  );
-
-  --callout-rgb: 238, 240, 241;
-  --callout-border-rgb: 172, 175, 176;
-  --card-rgb: 180, 185, 188;
-  --card-border-rgb: 131, 134, 135;
-}
-
-@media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-
-    --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
-    --secondary-glow: linear-gradient(
-      to bottom right,
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0.3)
-    );
-
-    --tile-start-rgb: 2, 13, 46;
-    --tile-end-rgb: 2, 5, 19;
-    --tile-border: conic-gradient(
-      #ffffff80,
-      #ffffff40,
-      #ffffff30,
-      #ffffff20,
-      #ffffff10,
-      #ffffff10,
-      #ffffff80
-    );
-
-    --callout-rgb: 20, 20, 20;
-    --callout-border-rgb: 108, 108, 108;
-    --card-rgb: 100, 100, 100;
-    --card-border-rgb: 200, 200, 200;
+    --c-primary: #ab2923;
+    --c-text-primary: #101010;
+    --c-text-secondary: #585858;
+    --c-bg: #f9f8f5;
+    --c-bg-card: #fbfbfb;
+    --c-bg-card-hover: #ffffff;
+    --c-border: #d1d1d1;
+    --c-text-link: #ab2923;
+    --c-text-link-hover: #e0362e;
+    --c-selected: #4a4a4a;
+    --shadow-color: 0deg 0% 50%;
   }
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+@layer components {
+  .header-container {
+    @apply mx-3 px-4 sm:mx-12 md:mx-16 lg:mx-auto lg:w-[60rem] xl:w-[72rem] 2xl:w-[75rem];
+  }
+
+  .normal-container {
+    @apply mx-3 sm:mx-8 md:mx-16 lg:mx-auto lg:w-[44rem] xl:w-[52rem] 2xl:w-[56rem];
+  }
+
+  .bg-container {
+    @apply relative h-[400px] w-full overflow-hidden;
+  }
+
+  .bg-image-container {
+    @apply overflow-hidden;
+    &::after {
+      @apply absolute h-full w-full;
+      background-color: rgba(0, 0, 0, 0.06);
+      content: '';
+    }
+  }
+
+  .post-container {
+    @apply sm:mx-12 sm:px-4 md:mx-24 lg:mx-auto lg:max-w-[60rem] 2xl:max-w-[72rem];
+  }
+
+  .post-card {
+    @apply my-shadow flex flex-col overflow-auto rounded-xl bg-bg-card duration-500 lg:flex-row odd:lg:flex-row-reverse;
+    &:hover {
+      @apply -translate-y-2 bg-bg-card-hover;
+    }
+  }
+
+  .card-tag-item {
+    @apply my-shadow rounded-2xl bg-bg px-[.75em] py-[.25em] font-mono hover:text-link-hover;
+    &::before {
+      @apply mr-1 font-rubik;
+      content: '#';
+    }
+  }
+
+  .archive-card {
+    @apply mt-4 flex flex-nowrap overflow-auto rounded-lg bg-bg-card;
+    @apply my-shadow;
+  }
+
+  .archive-card-detail {
+    @apply flex-shrink flex-grow basis-auto p-4;
+  }
+
+  .markdown-renderer {
+    @apply mx-4 break-words;
+
+    & > :first-child {
+      @apply mt-0;
+    }
+
+    h2,
+    h3,
+    h4 {
+      @apply tracking-tight;
+      &::after {
+        @apply relative text-sm opacity-30;
+        left: 0.35em;
+        color: var(--c-text-secondary);
+      }
+    }
+
+    h2::after {
+      content: 'h1';
+    }
+
+    h3::after {
+      content: 'h2';
+    }
+
+    h4::after {
+      content: 'h3';
+    }
+
+    hr {
+      @apply my-2 h-auto border-none;
+      border: none;
+
+      &::before {
+        content: '＊＊＊';
+        color: var(--c-text-secondary);
+        @apply block text-center;
+      }
+    }
+
+    pre {
+      @apply relative overflow-auto p-0;
+      &::after {
+        @apply pointer-events-none absolute right-4 top-2 select-none text-3xl font-bold uppercase opacity-40;
+        content: attr(data-language);
+        color: var(--c-bg);
+      }
+    }
+
+    code:not(.inline-code) {
+      @apply block overflow-x-auto px-4 py-3;
+    }
+
+    .link {
+      @apply text-link no-underline;
+      &:hover {
+        @apply text-link-hover underline;
+      }
+    }
+
+    .inline-code {
+      @apply m-[0.125rem] inline-block rounded-md bg-gray-300/30 px-1 py-0.5 font-sriracha font-normal;
+      /* background-color: var(--c-inline-code-bg);
+      color: var(--c-inline-code-text); */
+      &::before {
+        content: none;
+      }
+      &::after {
+        content: none;
+      }
+    }
+  }
 }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+@layer utilities {
+  .my-shadow {
+    box-shadow:
+      0px 4px 8px hsl(var(--shadow-color) / 0.08),
+      0px 0px 1px hsl(var(--shadow-color) / 0.16);
   }
 }
