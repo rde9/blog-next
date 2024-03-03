@@ -65,7 +65,7 @@ const ImageModal: FC<ImgProps> = ({ url, title, alt }) => {
             <img
               src={url}
               alt={alt || ''}
-              className='modal-content z-50 h-full max-h-[80vh] w-full max-w-prose object-scale-down'
+              className='modal-content z-50 h-full max-h-[80vh] w-full object-scale-down'
               style={{ transform: `scale(${zoom / 100})` }}
             />
             <ModalControl
