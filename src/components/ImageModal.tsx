@@ -41,43 +41,47 @@ const ImageModal: FC<ImgProps> = ({ url, title, alt }) => {
     setZoom((prev) => Math.max(prev - 10, 50));
   };
   return (
-    <div id='img-wrapper' className='not-prose my-4 flex flex-col items-center'>
-      <figure className='relative h-72 w-full'>
-        <Image
-          className='mx-auto cursor-zoom-in'
-          src={url}
-          alt={alt || ''}
-          onClick={toggleModal}
-          fill
-          style={{
-            visibility: showModal ? 'hidden' : 'visible',
-            objectFit: 'scale-down',
-          }}
-        />
-        {showModal && (
-          <ClientPortal selector='portal' show={showModal}>
-            <div className='modal-overlay fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black bg-opacity-70'>
-              <img
-                src={url}
-                alt={alt || ''}
-                className='modal-content z-50 h-full max-h-[80vh] w-full max-w-prose object-scale-down'
-                style={{ transform: `scale(${zoom / 100})` }}
-              />
-              <ModalControl
-                handleZoomIn={handleZoomIn}
-                handleZoomOut={handleZoomOut}
-                toggleModal={toggleModal}
-              />
-            </div>
-          </ClientPortal>
-        )}
-      </figure>
+    <figure className='relative flex w-full flex-col items-center'>
+      <Image
+        className='mx-auto max-h-96 cursor-zoom-in md:max-h-[576px]'
+        src={url}
+        alt={alt || ''}
+        onClick={toggleModal}
+        width='720'
+        height='400'
+        style={{
+          visibility: showModal ? 'hidden' : 'visible',
+          objectFit: 'contain',
+        }}
+      />
       {alt && alt !== 'Untitled' && (
-        <span className='p-1 text-center text-sm text-secondary-text'>
+        <figcaption className='not-prose break-all p-1 text-center text-sm text-secondary-text'>
           {alt}
-        </span>
+        </figcaption>
       )}
-    </div>
+      {showModal && (
+        <ClientPortal selector='portal' show={showModal}>
+          <div className='modal-overlay fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black bg-opacity-70'>
+            <img
+              src={url}
+              alt={alt || ''}
+              className='modal-content z-50 h-full max-h-[80vh] w-full max-w-prose object-scale-down'
+              style={{ transform: `scale(${zoom / 100})` }}
+            />
+            <ModalControl
+              handleZoomIn={handleZoomIn}
+              handleZoomOut={handleZoomOut}
+              toggleModal={toggleModal}
+            />
+          </div>
+        </ClientPortal>
+      )}
+    </figure>
+    // {alt && alt !== 'Untitled' && (
+    //   <span className='p-1 text-center text-sm text-secondary-text'>
+    //     {alt}
+    //   </span>
+    // )}
   );
 };
 
