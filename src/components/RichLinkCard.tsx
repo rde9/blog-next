@@ -54,7 +54,7 @@ const RichLinkCardInner: React.FC<Props> = async ({ href }) => {
         <div className='h-36 max-w-[2/5]'>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            className='h-full w-full object-cover'
+            className='dark:img-dark-filter h-full w-full object-cover'
             src={metadata.image}
             alt=''
           />

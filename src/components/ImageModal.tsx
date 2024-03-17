@@ -43,7 +43,7 @@ const ImageModal: FC<ImgProps> = ({ url, title, alt }) => {
   return (
     <figure className='relative flex w-full flex-col items-center'>
       <Image
-        className='mx-auto max-h-96 cursor-zoom-in md:max-h-[576px]'
+        className='dark:img-dark-filter mx-auto max-h-96 cursor-zoom-in md:max-h-[576px]'
         src={url}
         alt={alt || ''}
         onClick={toggleModal}

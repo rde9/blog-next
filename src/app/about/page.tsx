@@ -16,7 +16,7 @@ export default function About() {
   return (
     <div className='normal-container animate-main'>
       <h2 className='mb-4 pt-6 text-3xl'>关于</h2>
-      <div className='prose'>
+      <div className='prose dark:prose-invert'>
         <p>
           Github:{' '}
           <Link

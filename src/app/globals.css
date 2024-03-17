@@ -4,8 +4,8 @@
 
 @layer base {
   html {
-    @apply scroll-smooth;
-    background-color: var(--c-bg);
+    @apply scroll-smooth bg-bg;
+    transition: background 0.7s ease;
   }
 
   :root {
@@ -18,8 +18,26 @@
     --c-border: #d1d1d1;
     --c-text-link: #ab2923;
     --c-text-link-hover: #e0362e;
-    --c-selected: #4a4a4a;
+    --c-button-active: #4a4a4a;
+    --c-selected: #b33e39;
+    --c-inline-code-bg: #e4e7e3;
     --shadow-color: 0deg 0% 50%;
+
+    &.dark {
+      --c-primary: #e6edf2;
+      --c-text-primary: #e5e7eb;
+      --c-text-secondary: #b5b7bb;
+      --c-bg: #222222;
+      --c-bg-card: #3b3b3b;
+      --c-bg-card-hover: #3b3b3b;
+      --c-border: #cacfc9;
+      --c-text-link: #ff857f;
+      --c-text-link-hover: #ff6a63;
+      --c-button-active: #cacfc9;
+      --c-selected: #cacfc9;
+      --c-inline-code-bg: #767975;
+      --shadow-color: 0deg 0% 50%;
+    }
   }
 }
 
@@ -117,9 +135,8 @@
     pre {
       @apply relative overflow-auto p-0;
       &::after {
-        @apply pointer-events-none absolute right-4 top-2 select-none text-3xl font-bold uppercase opacity-40;
+        @apply pointer-events-none absolute right-4 top-2 select-none text-3xl font-bold uppercase text-bg opacity-40 dark:text-secondary-text;
         content: attr(data-language);
-        color: var(--c-bg);
       }
     }
 
@@ -136,8 +153,8 @@
 
     .inline-code {
       @apply m-[0.125rem] inline-block rounded-md bg-gray-300/30 px-1 py-0.5 font-sriracha font-normal;
-      /* background-color: var(--c-inline-code-bg);
-      color: var(--c-inline-code-text); */
+      background-color: var(--c-inline-code-bg);
+      /* color: var(--c-inline-code-text); */
       &::before {
         content: none;
       }
@@ -153,5 +170,9 @@
     box-shadow:
       0px 4px 8px hsl(var(--shadow-color) / 0.08),
       0px 0px 1px hsl(var(--shadow-color) / 0.16);
+  }
+
+  .img-dark-filter {
+    filter: brightness(0.8) contrast(1.2);
   }
 }

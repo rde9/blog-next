@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
 module.exports = {
+  darkMode: 'class',
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     fontFamily: {
@@ -43,6 +44,7 @@ module.exports = {
         primary: 'var(--c-primary)',
         link: 'var(--c-text-link)',
         selected: 'var(--c-selected)',
+        'button-active': 'var(--c-button-active)',
         'link-hover': 'var(--c-text-link-hover)',
         border: 'var(--c-border)',
         'primary-text': 'var(--c-text-primary)',

@@ -44,7 +44,7 @@ export const PaginationControl: FC<Props> = ({
             <li key={page}>
               <Link
                 href={`${pagePath}/${page}`}
-                className={`flex shrink-0 items-center rounded border-2 border-bg px-2 py-1 ${page === Number(pageId) ? 'bg-selected' : 'hover:bg-bg-card'}`}
+                className={`flex shrink-0 items-center rounded border-2 border-bg px-2 py-1 ${page === Number(pageId) ? 'bg-button-active' : 'hover:bg-bg-card'}`}
               >
                 <span
                   className={`${page === Number(pageId) ? 'text-bg-card' : ''}`}

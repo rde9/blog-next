@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Rss, Search } from 'react-feather';
 import { SITE_TITLE } from '@/constants';
+import ThemeSwitcher from './ThemeSwitcher';
 
 type NodeProps = { children: React.ReactNode };
 type NavItemProps = { href: string; item: string };
@@ -19,7 +20,7 @@ const Header: FC = () => {
             </span>
           </a>
         </div>
-        <div className='flex flex-wrap justify-center sm:animate-header-right sm:justify-between'>
+        <div className='flex flex-wrap justify-center gap-1 sm:animate-header-right sm:justify-between'>
           <Navbar>
             <NavbarItem href='/' item='首页' />
             <NavbarItem href='/archives' item='归档' />
@@ -29,7 +30,7 @@ const Header: FC = () => {
           <ul className='flex items-stretch text-primary-text'>
             <li className='flex hover:text-link-hover'>
               <a
-                className='flex cursor-not-allowed items-center p-3'
+                className='flex cursor-not-allowed items-center px-2 py-3'
                 href='/feed.xml'
                 title='RSS (not implemented yet)'
               >
@@ -37,10 +38,15 @@ const Header: FC = () => {
               </a>
             </li>
             <li className='flex hover:text-link-hover'>
-              <a className='flex items-center p-3' href='/search' title='搜索'>
+              <a
+                className='flex items-center px-2 py-3'
+                href='/search'
+                title='搜索'
+              >
                 <Search />
               </a>
             </li>
+            <ThemeSwitcher />
           </ul>
         </div>
       </header>
@@ -55,7 +61,10 @@ const Navbar: FC<NodeProps> = ({ children }) => {
 const NavbarItem: FC<NavItemProps> = ({ href, item }) => {
   return (
     <li className='flex'>
-      <Link href={href} className='flex items-center p-3 hover:text-link-hover'>
+      <Link
+        href={href}
+        className='flex items-center px-2 py-3 hover:text-link-hover'
+      >
         {item}
       </Link>
     </li>

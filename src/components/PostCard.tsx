@@ -20,7 +20,7 @@ const PostCard: FC<Props> = ({ post }) => {
               fill
               placeholder='blur'
               blurDataURL='data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
-              className='object-cover'
+              className='dark:img-dark-filter object-cover'
               // className='transition-transform duration-300 ease-linear group-hover:rotate-2 group-hover:scale-125'
             />
           </Link>

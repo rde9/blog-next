@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { ThemeProvider } from 'next-themes';
 import {
   Noto_Sans_SC,
   JetBrains_Mono,
@@ -69,13 +70,16 @@ export default function RootLayout({
     <html
       lang='zh-CN'
       className={`${jbmono.variable} ${notosanssc.variable} ${sriracha.variable} ${rubik.variable}`}
+      suppressHydrationWarning
     >
-      <body>
-        <Header />
-        <Content>{children}</Content>
-        <Footer />
-        <ScrollToTop />
-        <div id='portal' className='relative' />
+      <body className='selection:bg-selected selection:text-bg'>
+        <ThemeProvider attribute='class'>
+          <Header />
+          <Content>{children}</Content>
+          <Footer />
+          <ScrollToTop />
+          <div id='portal' className='relative' />
+        </ThemeProvider>
       </body>
     </html>
   );

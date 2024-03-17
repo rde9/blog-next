@@ -20,7 +20,7 @@ const Post: FC<Props> = ({ post }) => {
               src={post.photo}
               alt={post.title}
               fill
-              className='object-cover'
+              className='dark:img-dark-filter object-cover'
             />
           )}
         </div>
@@ -52,7 +52,7 @@ const Post: FC<Props> = ({ post }) => {
             <div id='markdown-card' className='px-2 py-6'>
               <div
                 id='markdown-wrapper'
-                className='prose max-w-none prose-blockquote:border-l-border  prose-blockquote:font-normal prose-blockquote:not-italic prose-blockquote:text-secondary-text dark:prose-blockquote:text-white/60'
+                className='prose max-w-none dark:prose-invert  prose-blockquote:border-l-border prose-blockquote:font-normal prose-blockquote:not-italic prose-blockquote:text-secondary-text dark:prose-blockquote:text-white/60'
               >
                 {/* <div id='markdown-renderer' className='markdown-renderer'>
                 <NodesRenderer nodes={mdastRoot.children} />
@@ -77,6 +77,7 @@ const Post: FC<Props> = ({ post }) => {
             <div
               id='toc-card'
               className='sticky top-6 max-h-[calc(-10rem+100vh)] self-start overflow-auto border-l-[1px] border-dotted px-4 py-6'
+              style={{ scrollbarWidth: 'thin' }}
             >
               <TOCRenderer>{post.body.raw}</TOCRenderer>
             </div>
