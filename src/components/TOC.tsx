@@ -27,9 +27,14 @@ const TOCRenderer: FC<Props> = async ({ children }) => {
   headingIndex = 0;
 
   const indentation = {
-    1: 'pl-0',
-    2: 'pl-4',
-    3: 'pl-8',
+    1: 'pl-0 leading-loose',
+    2: 'pl-4 tracking-tight leading-relaxed',
+    3: 'pl-8 tracking-tight leading-snug',
+  };
+  const size = {
+    1: 'text-lg font-semibold',
+    2: 'text-base font-normal',
+    3: 'text-md font-light',
   };
   const renderItems = (items: HeadingSlugArray) => {
     if (items.length === 0) return null;
@@ -38,12 +43,13 @@ const TOCRenderer: FC<Props> = async ({ children }) => {
       <ul>
         {items.map((item, index) => {
           const level = item.depth as keyof typeof indentation;
-          const paddingLeft = indentation[level] ?? '';
+          const padding = indentation[level] ?? '';
+          const textSize = size[level] ?? '';
           return (
-            <li key={index} className={`${paddingLeft}`}>
+            <li key={index} className={`${padding} ${textSize}`}>
               <a
                 href={`#${item.slug}`}
-                className='block py-1 hover:text-link-hover'
+                className='block py-1 hover:text-primary-500'
               >
                 {item.value}
               </a>
@@ -55,7 +61,7 @@ const TOCRenderer: FC<Props> = async ({ children }) => {
   };
   return (
     <aside id='toc-content'>
-      <h3 className='mb-3 text-lg font-semibold'>Table of Contents</h3>
+      <h3 className='mb-3 text-xl font-bold'>目录</h3>
       {renderItems(headingSlugArray)}
     </aside>
   );

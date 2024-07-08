@@ -9,22 +9,55 @@
   }
 
   :root {
-    --c-primary: #ab2923;
-    --c-text-primary: #101010;
-    --c-text-secondary: #585858;
-    --c-bg: #f9f8f5;
-    --c-bg-card: #fbfbfb;
+    --c-primary-100: #FCE1DC;
+    --c-primary-200: #F7C5BB;
+    --c-primary-300: #EF9986;
+    --c-primary-400: #DE654A;
+    --c-primary-500: #C54022;
+    --c-primary-600: #A33016;
+    --c-primary-700: #8A260F;
+
+    --c-secondary-100: #FCE8DC;
+    --c-secondary-200: #F7D3BC;
+    --c-secondary-300: #F0AE86;
+    --c-secondary-400: #DE8249;
+    --c-secondary-500: #C45F21;
+    --c-secondary-600: #A34B15;
+    --c-secondary-700: #81380B;
+
+    --c-accent-100: #F7F7F2;
+    --c-accent-200: #ECF0D9;
+    --c-accent-300: #A3C5A9;
+    --c-accent-400: #5D9667;
+    --c-accent-500: #3B7544;
+
+    --c-neutral-100: #FAF8F7;
+    --c-neutral-200: #E5E3E3;
+    --c-neutral-300: #D4CDCC;
+    --c-neutral-400: #A39998;
+    --c-neutral-500: #736866;
+    --c-neutral-600: #524542;
+    --c-neutral-700: #40312E;
+    --c-neutral-800: #26120E;
+    --c-neutral-900: #170602;
+
+    --c-title: var(--c-primary-500);
+    --c-text-primary: var(--c-neutral-900);
+    --c-text-secondary: var(--c-neutral-600);
+    --c-bg: var(--c-neutral-100);
+    --c-bg-card: var(--c-neutral-100);
     --c-bg-card-hover: #ffffff;
-    --c-border: #d1d1d1;
-    --c-text-link: #ab2923;
-    --c-text-link-hover: #e0362e;
-    --c-button-active: #4a4a4a;
-    --c-selected: #b33e39;
-    --c-inline-code-bg: #e4e7e3;
+    --c-border: var(--c-neutral-500);
+    --c-text-link: var(--c-primary-500);
+    --c-text-link-hover: var(--c-primary-400);
+    --c-card-tag-bg: var(--c-secondary-100);
+    --c-button-active: var(--c-secondary-400);
+    --c-selected: var(--c-neutral-500);
+    --c-inline-code-bg: var(--c-neutral-200);
     --shadow-color: 0deg 0% 50%;
 
     &.dark {
-      --c-primary: #e6edf2;
+      --c-title: #e6edf2;
       --c-text-primary: #e5e7eb;
       --c-text-secondary: #b5b7bb;
       --c-bg: #222222;
@@ -33,6 +66,7 @@
       --c-border: #cacfc9;
       --c-text-link: #ff857f;
       --c-text-link-hover: #ff6a63;
+      --c-card-tag-bg: #222222;
       --c-button-active: #cacfc9;
       --c-selected: #cacfc9;
       --c-inline-code-bg: #767975;
@@ -75,7 +109,7 @@
   }
 
   .card-tag-item {
-    @apply my-shadow rounded-2xl bg-bg px-[.75em] py-[.25em] font-mono hover:text-link-hover;
+    @apply rounded-2xl px-[.75em] py-[.25em] font-mono bg-bg-card-tag hover:my-shadow;
     &::before {
       @apply mr-1 font-rubik;
       content: '#';

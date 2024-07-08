@@ -3,8 +3,7 @@
 import { FC } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { ChevronLeft, ChevronRight } from 'react-feather';
-
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 type Props = {
   pageId: string;
   pagePath: string;

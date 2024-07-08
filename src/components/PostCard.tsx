@@ -2,7 +2,7 @@ import { FC } from 'react';
 import type { Article } from 'contentlayer/generated';
 import Link from 'next/link';
 import { formatDate } from '@/utils/posts';
-import { Clock, MoreHorizontal, Save } from 'react-feather';
+import { Clock, MoreHorizontal, Save } from 'lucide-react';
 import Image from 'next/image';
 type Props = {
   post: Article;
@@ -44,7 +44,7 @@ const PostCard: FC<Props> = ({ post }) => {
               </span>
             </div>
             <Link href={`/post/${post.slug}`}>
-              <span className='my-2 block text-xl font-bold text-primary'>
+              <span className='my-2 block text-xl font-bold text-title'>
                 {post.title}
               </span>
             </Link>

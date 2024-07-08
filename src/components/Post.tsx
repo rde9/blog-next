@@ -5,7 +5,7 @@ import { MarkdownRenderer } from './Markdown';
 import TOCRenderer from './TOC';
 import Link from 'next/link';
 import { formatDate } from '@/utils/posts';
-import { Clock, Save } from 'react-feather';
+import { Clock, Save } from 'lucide-react';
 type Props = {
   post: Article;
 };
@@ -47,7 +47,7 @@ const Post: FC<Props> = ({ post }) => {
         </header>
       </div>
       <div className='post-container mt-4 animate-main'>
-        <div className='gap-4 lg:grid lg:grid-cols-[minmax(36rem,_2.5fr)_1fr]'>
+        <div className='gap-4 lg:grid lg:grid-cols-[minmax(36rem,_2.5fr)_1.25fr]'>
           <div id='grid-main' className='xl:max-w-none'>
             <div id='markdown-card' className='px-2 py-6'>
               <div

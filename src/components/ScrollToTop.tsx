@@ -1,7 +1,7 @@
 'use client';
 import { useRef } from 'react';
 import { useWindowScroll } from '@uidotdev/usehooks';
-import { Navigation2 } from 'react-feather';
+import { Navigation2 } from 'lucide-react';
 import { CSSTransition } from 'react-transition-group';
 
 const classNames = {

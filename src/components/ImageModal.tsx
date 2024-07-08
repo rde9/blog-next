@@ -2,7 +2,7 @@
 
 import { FC, useState } from 'react';
 import ClientPortal from './ClientPortal';
-import { Minus, Plus, X } from 'react-feather';
+import { Minus, Plus, X } from 'lucide-react';
 import Image from 'next/image';
 
 /*

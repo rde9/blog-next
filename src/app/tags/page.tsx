@@ -2,7 +2,7 @@ import { getAllTags } from '@/utils/posts';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { FC } from 'react';
-import { Tag } from 'react-feather';
+import { LucideTag } from 'lucide-react';
 
 const tags = getAllTags();
 const tagsArray = Object.entries(tags);
@@ -42,7 +42,7 @@ const TagItem: FC<{ tag: string; count: number }> = ({ tag, count }) => {
       }}
     >
       <span className='flex items-center duration-300 hover:scale-105'>
-        <Tag width={size} height={size} />
+        <LucideTag width={size} height={size} />
         <Link href={`/tags/${tag}`} className='mx-1'>
           {tag}
         </Link>

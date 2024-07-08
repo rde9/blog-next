@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
-import { Sun, Moon, Monitor, Sunset, Sunrise } from 'react-feather';
+import { SunMoon, Monitor, Sun, Moon } from 'lucide-react';
 import { FC } from 'react';
 
 const ThemeSwitcher: FC = () => {
@@ -30,7 +30,7 @@ const ThemeSwitcher: FC = () => {
         onClick={() => setMenuOpen(!menuOpen)}
         title='切换暗色模式'
       >
-        <Sunset />
+        <SunMoon />
       </button>
       {menuOpen && (
         <ul className='absolute right-0 top-full z-20 flex flex-col gap-1 whitespace-nowrap rounded-md bg-bg-card p-2 shadow-md'>
