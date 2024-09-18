@@ -84,6 +84,13 @@
     @apply mx-3 sm:mx-8 md:mx-16 lg:mx-auto lg:w-[44rem] xl:w-[52rem] 2xl:w-[56rem];
   }
 
+  .page-heading {
+    @apply mb-4 mt-6 text-4xl font-fredoka font-semibold tracking-wider text-gray-800 dark:text-gray-200;
+    span {
+      @apply text-link;
+    }
+  }
+
   .bg-container {
     @apply relative h-[400px] w-full overflow-hidden;
   }

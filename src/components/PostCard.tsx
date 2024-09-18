@@ -29,7 +29,7 @@ const PostCard: FC<Props> = ({ post }) => {
       <div id='post-meta' className='m-4 basis-full md:basis-[45%]'>
         <div className='flex h-full flex-col justify-between'>
           <div className='flex flex-col gap-2'>
-            <div className='flex flex-wrap gap-4 text-secondary-text'>
+            <div className='flex flex-wrap gap-4 font-rubik text-secondary-text'>
               <span className='flex items-center'>
                 <Clock size={16} strokeWidth={1} className='inline-block' />
                 <span className='ml-1 text-sm'>

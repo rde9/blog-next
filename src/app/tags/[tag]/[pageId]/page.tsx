@@ -64,20 +64,24 @@ const TagPage: FC<{ params: Params }> = ({ params }) => {
 
   return (
     <div className='normal-container animate-main'>
-      <h2 className='mb-2 pt-6 text-3xl'>标签: {tag}</h2>
+      <h2 className='page-heading'>
+        Tag: <span>{tag}</span>
+      </h2>
       {postGroups.map((group) => {
         return (
           <div key={group.year} id={`year-${group.year}`}>
-            <h2 className='mb-2 pt-4 text-2xl'>{group.year}</h2>
+            <h2 className='mb-4 mt-4 font-fredoka text-2xl font-medium'>
+              {group.year}
+            </h2>
             {group.posts.map((post) => {
               return (
                 <div key={post.slug} className='archive-card'>
                   <div className='archive-card-detail'>
-                    <div className='mb-2 text-sm text-[--text-l]'>
+                    <div className='mb-2 font-rubik text-sm text-[--text-l]'>
                       <span>{formatDate(post.createdAt)}</span>
                     </div>
                     <Link href={`/post/${post.slug}`}>
-                      <span className='block'>{post.title}</span>
+                      <span className='block text-lg'>{post.title}</span>
                     </Link>
                   </div>
                 </div>

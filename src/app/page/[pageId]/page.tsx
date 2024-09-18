@@ -39,6 +39,9 @@ const MainPage: FC<{ params: Params }> = ({ params }) => {
 
   return (
     <div className='normal-container animate-main'>
+      <h2 className='page-heading'>
+        Posts: Page <span>{pageId}</span>
+      </h2>
       <div className='mx-4 flex flex-col gap-8 pt-6'>
         {posts.map((post) => {
           return (

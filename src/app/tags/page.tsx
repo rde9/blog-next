@@ -22,7 +22,9 @@ export const metadata: Metadata = {
 const TagsPage: FC = () => {
   return (
     <div className='normal-container animate-main'>
-      <h2 className='mb-4 pt-6 text-3xl'>标签列表</h2>
+      <h2 className='page-heading'>
+        <span>T</span>ags
+      </h2>
       <div className='flex flex-wrap items-baseline gap-6 py-3'>
         {sortedTags.map(([tag, count]) => (
           <TagItem key={tag} tag={tag} count={count} />
@@ -43,11 +45,11 @@ const TagItem: FC<{ tag: string; count: number }> = ({ tag, count }) => {
     >
       <span className='flex items-center duration-300 hover:scale-105'>
         <LucideTag width={size} height={size} />
-        <Link href={`/tags/${tag}`} className='mx-1'>
+        <Link href={`/tags/${tag}`} className='mx-1 font-rubik'>
           {tag}
         </Link>
       </span>
-      <sup className='text-sm text-secondary-text'>{count}</sup>
+      <sup className='font-rubik text-sm text-secondary-text'>{count}</sup>
     </span>
   );
 };

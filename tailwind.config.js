@@ -85,6 +85,7 @@ module.exports = {
           'sans-serif',
         ],
         rubik: ['var(--font-rubik)', 'ui-sans-serif', 'sans-serif'],
+        fredoka: ['var(--font-fredoka)', 'ui-sans-serif', 'sans-serif'],
       },
       keyframes: {
         'header-left': {

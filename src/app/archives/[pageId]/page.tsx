@@ -54,19 +54,24 @@ const Archives: FC<{ params: Params }> = ({ params }) => {
 
   return (
     <div className='normal-container animate-main'>
+      <h2 className='page-heading'>
+        <span>A</span>rchive
+      </h2>
       {postGroups.map((group) => {
         return (
           <div key={group.year} id={`year-${group.year}`}>
-            <h2 className='mb-4 pt-6 text-3xl'>{group.year}</h2>
+            <h2 className='mb-4 mt-4 font-fredoka text-2xl font-medium'>
+              {group.year}
+            </h2>
             {group.posts.map((post) => {
               return (
                 <div key={post.slug} className='archive-card'>
                   <div className='archive-card-detail text-primary-text'>
-                    <div className='mb-2 text-sm text-secondary-text'>
+                    <div className='mb-2 font-rubik text-sm text-secondary-text'>
                       <span>{formatDate(post.createdAt)}</span>
                     </div>
                     <Link href={`/post/${post.slug}`}>
-                      <span className='block'>{post.title}</span>
+                      <span className='block text-lg'>{post.title}</span>
                     </Link>
                   </div>
                 </div>

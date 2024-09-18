@@ -61,7 +61,7 @@ const TOCRenderer: FC<Props> = async ({ children }) => {
   };
   return (
     <aside id='toc-content'>
-      <h3 className='mb-3 text-xl font-bold'>目录</h3>
+      <h2 className='mb-3 text-3xl font-bold'>目录</h2>
       {renderItems(headingSlugArray)}
     </aside>
   );

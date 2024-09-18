@@ -15,14 +15,14 @@ const Header: FC = () => {
         <div className='flex basis-full justify-center sm:basis-auto sm:animate-header-left'>
           <a className='flex items-center gap-2 py-1 text-xl' href='/'>
             <Logo />
-            <span className='font-rubik text-xl font-medium tracking-tight text-primary-600'>
+            <span className='font-fredoka text-2xl font-medium text-primary-600'>
               {SITE_TITLE}
             </span>
           </a>
         </div>
         <div className='flex flex-wrap justify-center gap-1 sm:animate-header-right sm:justify-between'>
           <Navbar>
-            {/* <NavbarItem href='/' item='首页' /> */}
+            <NavbarItem href='/page/1' item='首页' />
             <NavbarItem href='/archives' item='归档' />
             <NavbarItem href='/tags' item='标签' />
             <NavbarItem href='/about' item='关于' />
@@ -60,10 +60,10 @@ const Navbar: FC<NodeProps> = ({ children }) => {
 
 const NavbarItem: FC<NavItemProps> = ({ href, item }) => {
   return (
-    <li className='flex'>  
+    <li className='flex'>
       <Link
         href={href}
-        className='flex items-center px-2 lg:px-3 py-3 hover:text-link-hover'
+        className='flex items-center px-2 py-3 text-lg hover:text-link-hover lg:px-3'
       >
         {item}
       </Link>

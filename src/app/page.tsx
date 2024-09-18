@@ -24,6 +24,9 @@ const Home: FC = () => {
 
   return (
     <div className='normal-container animate-main'>
+      <h2 className='page-heading'>
+        <span>R</span>ecent <span>P</span>osts
+      </h2>
       <div className='mx-4 flex flex-col gap-8 pt-6'>
         {posts.map((post) => {
           return <PostCard key={post.slug} post={post} />;

@@ -5,6 +5,7 @@ import {
   JetBrains_Mono,
   Sriracha,
   Rubik,
+  Fredoka,
 } from 'next/font/google';
 import './globals.css';
 import { SITE_TITLE, SITE_DESCRIPTION, metadataBase } from '@/constants';
@@ -24,6 +25,12 @@ const rubik = Rubik({
   display: 'swap',
   subsets: ['latin'],
   variable: '--font-rubik',
+});
+
+const fredoka = Fredoka({
+  display: 'swap',
+  subsets: ['latin'],
+  variable: '--font-fredoka',
 });
 
 const jbmono = JetBrains_Mono({
@@ -69,7 +76,7 @@ export default function RootLayout({
   return (
     <html
       lang='zh-CN'
-      className={`${jbmono.variable} ${notosanssc.variable} ${sriracha.variable} ${rubik.variable}`}
+      className={`${jbmono.variable} ${notosanssc.variable} ${sriracha.variable} ${rubik.variable} ${fredoka.variable}`}
       suppressHydrationWarning
     >
       <body className='selection:bg-selected selection:text-bg'>
