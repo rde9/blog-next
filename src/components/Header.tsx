@@ -63,9 +63,9 @@ const NavbarItem: FC<NavItemProps> = ({ href, item }) => {
     <li className='flex'>
       <Link
         href={href}
-        className='flex items-center px-2 py-3 text-lg hover:text-link-hover lg:px-3'
+        className='group flex items-center px-2 py-3 text-lg lg:px-3 hover:text-link-hover'
       >
-        {item}
+      <span className='bg-gradient-to-l from-link-hover to-link-hover bg-[length:0px_2px] bg-no-repeat bg-right-bottom py-2 transition-bg-size duration-300 group-hover:bg-[length:100%_2px] group-hover:bg-left-bottom'>{item}</span>
       </Link>
     </li>
   );

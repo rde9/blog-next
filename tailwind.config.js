@@ -111,6 +111,9 @@ module.exports = {
         'bg-img': 'bg-img 1s ease-in-out',
         main: 'main 1s ease-in-out',
       },
+      transitionProperty: {
+        'bg-size': 'background-size',
+      }
     },
   },
   plugins: [require('@tailwindcss/typography')],
