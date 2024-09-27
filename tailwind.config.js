@@ -106,10 +106,10 @@ module.exports = {
         },
       },
       animation: {
-        'header-left': 'header-left 1s ease-in-out',
-        'header-right': 'header-right 1s ease-in-out',
-        'bg-img': 'bg-img 1s ease-in-out',
-        main: 'main 1s ease-in-out',
+        'header-left': 'header-left 0.5s ease-in-out',
+        'header-right': 'header-right 0.5s ease-in-out',
+        'bg-img': 'bg-img 0.5s ease-in-out',
+        main: 'main 0.7s ease-in-out',
       },
       transitionProperty: {
         'bg-size': 'background-size',
