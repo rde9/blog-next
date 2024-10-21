@@ -13,7 +13,7 @@ const Header: FC = () => {
     <div id='header-wrapper' className='animate-bg-img sm:animate-none'>
       <header className='header-container flex flex-wrap justify-center sm:justify-between'>
         <div className='flex basis-full justify-center sm:basis-auto sm:animate-header-left'>
-          <a className='flex items-end sm:items-center gap-1 py-1 text-xl' href='/'>
+          <a className='flex items-end sm:items-center flex-nowrap gap-1 py-1 text-xl' href='/'>
             <Logo />
             <span className='relative z-10 px-1 font-fredoka text-2xl font-medium text-link transition-colors duration-500 before:absolute before:inset-0 before:-z-10 before:my-auto before:origin-top-right before:scale-x-0 before:bg-link before:transition-transform before:duration-500 hover:text-gray-50 hover:before:origin-top-left hover:before:scale-x-100 dark:text-primary-text dark:before:bg-primary-text hover:dark:text-primary-600'>
               {SITE_TITLE}
