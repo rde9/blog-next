@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Github, Twitter, Youtube, Mail } from 'lucide-react';
+import { Github, Twitter, Youtube, Mail, ExternalLinkIcon } from 'lucide-react';
+import { FC } from 'react';
 
 export const metadata: Metadata = {
   title: `关于`,
@@ -12,6 +13,29 @@ export const metadata: Metadata = {
     description: '关于我',
   },
 };
+
+type ExternalLinkProps = {
+  href: string | undefined;
+  children: React.ReactNode;
+};
+
+const ExternalLink: FC<ExternalLinkProps> = ({ href, children }) => (
+  <Link
+    href={href ?? ''}
+    target='_blank'
+    rel='noreferrer'
+    className='group inline-flex items-center no-underline transition-colors duration-300 font-rubik text-sm'
+  >
+    <span className='text-gray-600 transition-colors duration-300 group-hover:text-gray-900 dark:text-gray-200 dark:group-hover:text-gray-300'>
+      {children}
+    </span>
+    <span className='relative'>
+      <ExternalLinkIcon className='ml-1 h-3 w-3 text-gray-600 transition-opacity duration-300 group-hover:opacity-0 dark:text-gray-200' />
+      <ExternalLinkIcon className='absolute left-0 top-0 ml-1 h-3 w-3 text-gray-800 opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:text-gray-300' />
+    </span>
+  </Link>
+);
+
 
 export default function About() {
   return (
@@ -83,6 +107,26 @@ export default function About() {
             </span>
           </div>
         </div>
+      </section>
+
+      <section>
+        <h2 className='page-heading'>
+          <span>C</span>redits
+        </h2>
+        <p className='leading-relaxed text-gray-600 dark:text-gray-100'>
+          角色设计: はるゐろは 様{' | '}
+          <ExternalLink href='https://sakuraharuiroha.wixsite.com/haruiroha'>
+            HomePage
+          </ExternalLink>{' · '}
+          <ExternalLink href='https://x.com/_Haruiroha'>
+            X(Twitter)
+          </ExternalLink>
+          <br />
+          像素画: 千羽（ちはね） 様{' | '}
+          <ExternalLink href='https://x.com/tobihaneta'>
+            X(Twitter)
+          </ExternalLink>
+        </p>
       </section>
     </div>
   );

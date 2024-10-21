@@ -13,9 +13,9 @@ const Header: FC = () => {
     <div id='header-wrapper' className='animate-bg-img sm:animate-none'>
       <header className='header-container flex flex-wrap justify-center sm:justify-between'>
         <div className='flex basis-full justify-center sm:basis-auto sm:animate-header-left'>
-          <a className='flex items-center gap-1 py-1 text-xl' href='/'>
+          <a className='flex items-end sm:items-center gap-1 py-1 text-xl' href='/'>
             <Logo />
-            <span className='relative z-10 px-1 font-fredoka text-2xl font-medium text-primary-600 transition-colors duration-500 before:absolute before:inset-0 before:-z-10 before:my-auto before:origin-top-right before:scale-x-0 before:bg-primary-600 before:transition-transform before:duration-500 hover:text-gray-50 hover:before:origin-top-left hover:before:scale-x-100 dark:text-primary-text dark:before:bg-primary-text hover:dark:text-primary-600'>
+            <span className='relative z-10 px-1 font-fredoka text-2xl font-medium text-link transition-colors duration-500 before:absolute before:inset-0 before:-z-10 before:my-auto before:origin-top-right before:scale-x-0 before:bg-link before:transition-transform before:duration-500 hover:text-gray-50 hover:before:origin-top-left hover:before:scale-x-100 dark:text-primary-text dark:before:bg-primary-text hover:dark:text-primary-600'>
               {SITE_TITLE}
             </span>
           </a>
@@ -30,7 +30,7 @@ const Header: FC = () => {
           <ul className='flex items-stretch text-primary-text'>
             <li className='flex hover:text-link-hover'>
               <a
-                className='flex cursor-not-allowed items-center px-2 py-3'
+                className='flex cursor-not-allowed items-center px-2 lg:py-3'
                 href='/feed.xml'
                 title='RSS (not implemented yet)'
               >
@@ -39,7 +39,7 @@ const Header: FC = () => {
             </li>
             <li className='flex hover:text-link-hover'>
               <a
-                className='flex items-center px-2 py-3'
+                className='flex items-center px-2 lg:py-3'
                 href='/search'
                 title='搜索'
               >
@@ -63,7 +63,7 @@ const NavbarItem: FC<NavItemProps> = ({ href, item }) => {
     <li className='flex'>
       <Link
         href={href}
-        className='group flex items-center px-2 py-3 text-lg lg:px-3 hover:text-link-hover'
+        className='group flex items-center px-2 lg:py-3 text-lg lg:px-3 hover:text-link-hover'
       >
       <span className='bg-gradient-to-l from-link-hover to-link-hover bg-[length:0px_2px] bg-no-repeat bg-right-bottom py-2 transition-bg-size duration-300 group-hover:bg-[length:100%_2px] group-hover:bg-left-bottom'>{item}</span>
       </Link>
@@ -73,7 +73,7 @@ const NavbarItem: FC<NavItemProps> = ({ href, item }) => {
 
 function Logo() {
   return (
-    <div className='logo-wrapper my-2'>
+    <div className='logo-wrapper sm:mb-3'>
       <Image src='/logo.svg' alt='Logo' width='32' height='32' priority />
     </div>
   );
