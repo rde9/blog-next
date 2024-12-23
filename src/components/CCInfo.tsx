@@ -10,7 +10,7 @@ type Props = {
 // export const CCInfo: React.FC<Props> = ({ title, description, imageUrl }) => {
 export const CCInfo: React.FC<Props> = ({ imageUrl }) => {
   return (
-    <div className='not-prose w-full flex flex-row gap-6 overflow-hidden dark:p-4 bg-bg-card'>
+    <div className='not-prose w-full flex flex-row gap-6 overflow-hidden px-4 dark:py-4 bg-bg-card'>
 
         {/* 左侧文本内容 */}
         <div className='flex flex-1'>
