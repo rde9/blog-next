@@ -3,11 +3,24 @@ import Image from 'next/image';
 import { Article } from 'contentlayer/generated';
 import { MarkdownRenderer } from './Markdown';
 import TOCRenderer from './TOC';
+import { CCInfo } from './CCInfo';
 import Link from 'next/link';
 import { formatDate } from '@/utils/posts';
 import { Clock, Save } from 'lucide-react';
 type Props = {
   post: Article;
+};
+
+const Spacer = () => {
+  return (
+    <div className='my-8 flex items-center justify-center'>
+      <div className='h-[1px] flex-grow bg-gray-200 dark:bg-gray-700'></div>
+      <span className='mx-4 font-serif text-sm italic text-gray-400 dark:text-gray-500'>
+        fin
+      </span>
+      <div className='h-[1px] flex-grow bg-gray-200 dark:bg-gray-700'></div>
+    </div>
+  );
 };
 
 const Post: FC<Props> = ({ post }) => {
@@ -58,6 +71,8 @@ const Post: FC<Props> = ({ post }) => {
                 <NodesRenderer nodes={mdastRoot.children} />
               </div> */}
                 <MarkdownRenderer>{post.body.raw}</MarkdownRenderer>
+                <Spacer />
+                <CCInfo imageUrl='/cc_sign.png' />
               </div>
               <div className='flex flex-wrap gap-2 p-4 text-sm font-medium'>
                 {post.tags.map((tag) => (
