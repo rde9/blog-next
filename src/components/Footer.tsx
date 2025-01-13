@@ -5,7 +5,7 @@ const Footer: FC = () => {
   return (
     <footer className='flex animate-main flex-col gap-1 p-6 font-rubik text-secondary-text'>
       <div className='flex flex-wrap items-center justify-center gap-4'>
-        <span>© 2021 - 2024</span>
+        <span>© 2021 - 2025</span>
         <span>
           made with ❤️ by{' '}
           <Link href='https://github.com/rde9' className='hover:underline'>
