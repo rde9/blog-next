@@ -1,6 +1,7 @@
 ---
 title: '第三次博客重构记录'
 createdAt: '2024-03-02T00:00:00.000Z'
+updatedAt: '2025-02-26T00:00:00.000Z'
 photo: 'https://img.ayame.network/blog-redesign/banner.jpg'
 tags: ['life', 'BlogOps', 'WIP']
 summary: '一次处处踩坑的开发经历'
@@ -26,9 +27,9 @@ https://sspai.com/post/63028
 
 https://sspai.com/post/66641
 
-以 Notion 作为 CMS 确实是一个非常有趣的想法，它的富文本编辑器也比手写 Markdown 舒服很多。Nobelium 在被访问时自动抓取 Notion 文章的做法也省去了手动 `hexo g && hexo d` 的麻烦。我的 Nobelium 博客还在运行，存放着2022年之后的文章。
+以 Notion 作为 CMS 确实是一个非常有趣的想法，它的富文本编辑器也比手写 Markdown 舒服很多。Nobelium 在被访问时自动抓取 Notion 文章的做法也省去了手动 `hexo g && hexo d` 的麻烦。我的 Nobelium 博客 ~~还在运行~~ 已归档，存放着2022年之后的文章。
 
-https://nobelium.kaai.dev/
+https://blog-archive.kaai.dev/
 
 ## Next.js 时代
 
@@ -64,7 +65,7 @@ https://blog.stin.ink/articles/introduce-contentlayer
 
 ## 文章渲染与代码高亮：remark+shiki
 
-[Shiki](https://shiki.style) 是一款美观而强大的语法高亮库，使用与 VS Code 的语法高亮引擎，相比 Highlight.js, Prism 等传统高亮器，Shiki 的代码高亮效果色彩更加丰富、更加美观——等等，你说它必须异步加载？这意味着我没法用 react-markdown 这种简单的 Markdown 渲染组件了（仅支持同步的 remark 插件）！
+[Shiki](https://shiki.style) 是一款美观而强大的语法高亮库，使用与 VS Code 的语法高亮引擎，相比 Highlight.js, Prism 等传统高亮器，Shiki 的代码高亮效果色彩更加丰富、更加美观——等等，你说它必须异步加载？这意味着我没法用 react-markdown 这种简单的 Markdown 渲染组件了！（仅支持同步的 remark 插件）
 
 https://github.com/shikijs/shiki/issues/540
 
@@ -74,9 +75,23 @@ https://github.com/remarkjs/react-markdown/issues/680
 
 https://blog.stin.ink/articles/replace-react-markdown-with-remark
 
-基本思路是，手动处理 remark 产生的 [mdast](https://github.com/syntax-tree/mdast) (不需要进行下一步转换，即不需要使用 rehype 生成 html)：将 mdast 中所有可能的节点类型都映射为自定义的 React 组件，再交给 React 渲染。这样做可以实现高度的定制化，但是也意味着需要自己处理所有的 Markdown 语法，包括标题、列表、表格等等。这个过程非常繁琐，好在本文给了我很大的帮助。我的代码基于这篇文章的代码进行了一些小改进，如正确处理图像节点（不应被包裹在 `p` 标签中）、代码块添加 `aria-label` 指示语言等。
+基本思路是，手动处理 remark 产生的 [mdast](https://github.com/syntax-tree/mdast) (不需要进行下一步转换，即不需要使用 rehype 生成 html)：将 mdast 中所有可能的节点类型都映射为自定义的 React 组件，再交给 React 渲染。这样做可以实现高度的定制化，但是也意味着需要自己处理所有的 Markdown 语法，包括标题、列表、表格等等。这个过程非常繁琐，好在本文给了我很大的帮助。我的代码基于这篇文章的代码进行了一些小改进：
+
+> update 2025.02.26
+
+- 正确处理图像节点（不应被包裹在 `p` 标签中）
+- 代码块添加 `aria-label` 指示语言
+- 处理同一段落内的换行，这里参考了 [作业部落 Cmd Markdown 编辑器](https://zybuluo.com/mdeditor) 的实现，即将换行符 `\n` 替换为 `<br />` 标签
 
 Shiki 的高亮过程是异步的，因此 Markdown 渲染组件应该是一个 Server Component. 关于服务端渲染的问题我还不是特别清楚，所以这里略过。请参考 `src/plugins/remark-shiki.ts` 和 `src/components/Markdown.tsx`.
+
+## 数学公式渲染：KaTeX
+
+> update 2025.02.26
+
+[$$\KaTeX$$](https://katex.org/) 是一个快速的数学公式渲染库，可以在浏览器中高效地渲染复杂数学表达式，相比 MathJax 更加轻量。
+
+有了前文的铺垫，渲染数学公式其实很简单，只需引入 `katex` 和 `remark-math` 这两个库，再按照上一段中的思路配置 remark 插件即可。
 
 ## 图床：BackBlaze
 

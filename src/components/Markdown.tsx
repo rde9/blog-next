@@ -4,6 +4,8 @@ import React, { FC } from 'react';
 import { remark } from 'remark';
 import remarkFrontmatter from 'remark-frontmatter';
 import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
+import { InlineMath, BlockMath } from 'react-katex';
 import { remarkShiki } from '@/plugins/remark-shiki';
 import { remarkBlockLink } from '@/plugins/remark-block-link';
 import { remarkPlaceholder } from '@/plugins/remark-placeholder';
@@ -11,10 +13,12 @@ import { getHeadingSlugArray } from '@/utils/markdown';
 import type { HeadingSlugArray } from '@/utils/markdown';
 import ImageModal from './ImageModal';
 import { RichLinkCard } from './RichLinkCard';
+import 'katex/dist/katex.min.css';
 
 const parseMarkdown = remark()
   .use(remarkFrontmatter)
   .use(remarkBlockLink)
+  .use(remarkMath)
   .use(
     remarkPlaceholder,
   ) /* just a placeholder, does nothing, to be replaced soon */
@@ -95,6 +99,12 @@ const NodesRenderer: FC<{ nodes: RootContent[] }> = ({ nodes }) => {
       case 'block-link': {
         return <BlockLinkNode key={index} node={node} />;
       }
+      case 'math': {
+        return <MathNode key={index} node={node} />;
+      }
+      case 'inlineMath': {
+        return <InlineMathNode key={index} node={node} />;
+      }
       // case "twitter-embed": {
       //   return <TwitterEmbedNode key={index} node={node} />;
       // }
@@ -144,8 +154,24 @@ const HeadingNode: FC<{ node: RootContentMap['heading'] }> = ({ node }) => {
   );
 };
 
+// 特别处理：同一段落内的换行
 const TextNode: FC<{ node: RootContentMap['text'] }> = ({ node }) => {
-  return node.value;
+  // 将文本内容按换行符分割成数组
+  const lines = node.value.split('\n');
+  
+  // 如果只有一行文本，直接返回
+  if (lines.length === 1) {
+    return node.value;
+  }
+  
+  // 如果有多行文本，在每行之间添加<br>标签
+  return lines.map((line, index) => (
+    // 对于最后一行，不需要添加<br>
+    <React.Fragment key={index}>
+      {line}
+      {index < lines.length - 1 && <br />}
+    </React.Fragment>
+  ));
 };
 
 const ParagraphNode: FC<{ node: RootContentMap['paragraph'] }> = ({ node }) => {
@@ -295,6 +321,16 @@ const BlockLinkNode: FC<{ node: RootContentMap['block-link'] }> = ({
       <RichLinkCard href={node.url} isExternal />
     </div>
   );
+};
+
+const MathNode: FC<{ node: RootContentMap['math'] }> = ({ node }) => {
+  return <BlockMath math={node.value} />;
+};
+
+const InlineMathNode: FC<{ node: RootContentMap['inlineMath'] }> = ({
+  node,
+}) => {
+  return <InlineMath math={node.value} />;
 };
 
 //   const TwitterEmbedNode: FC<{ node: RootContentMap["twitter-embed"] }> = ({ node }) => {
