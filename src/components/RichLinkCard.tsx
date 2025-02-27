@@ -51,7 +51,7 @@ const RichLinkCardInner: React.FC<Props> = async ({ href }) => {
         </div>
       </div>
       {metadata.image && (
-        <div className='h-36 max-w-[2/5]'>
+        <div className='hidden sm:block h-36 max-w-[2/5]'>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             className='dark:img-dark-filter h-full w-full object-cover'
@@ -75,7 +75,7 @@ const RichLinkCardError: React.FC<{ href: string }> = ({ href }) => {
         border: '1px solid #303030',
       }}
     >
-      <p className='font-medium'>Page preview not available</p>
+      <p className='font-medium'>No preview</p>
       <div className='text-sm text-secondary-text'>{href}</div>
     </a>
   );

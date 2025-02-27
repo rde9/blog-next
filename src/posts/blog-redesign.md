@@ -1,7 +1,7 @@
 ---
 title: '第三次博客重构记录'
 createdAt: '2024-03-02T00:00:00.000Z'
-updatedAt: '2025-02-26T00:00:00.000Z'
+updatedAt: '2025-02-27T00:00:00.000Z'
 photo: 'https://img.ayame.network/blog-redesign/banner.jpg'
 tags: ['life', 'BlogOps', 'WIP']
 summary: '一次处处踩坑的开发经历'
@@ -82,6 +82,10 @@ https://blog.stin.ink/articles/replace-react-markdown-with-remark
 - 正确处理图像节点（不应被包裹在 `p` 标签中）
 - 代码块添加 `aria-label` 指示语言
 - 处理同一段落内的换行，这里参考了 [作业部落 Cmd Markdown 编辑器](https://zybuluo.com/mdeditor) 的实现，即将换行符 `\n` 替换为 `<br />` 标签
+
+> update 2025.02.27
+
+- RichLinkCard metadata `og:image` fallback(验证图片是否可访问)，并在小尺寸设备上隐藏图片预览
 
 Shiki 的高亮过程是异步的，因此 Markdown 渲染组件应该是一个 Server Component. 关于服务端渲染的问题我还不是特别清楚，所以这里略过。请参考 `src/plugins/remark-shiki.ts` 和 `src/components/Markdown.tsx`.
 

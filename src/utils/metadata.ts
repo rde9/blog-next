@@ -47,7 +47,12 @@ export async function fetchSiteMetadata(
       metadata.description = meta.getAttribute('content') ?? undefined;
     }
     if (property === 'og:image') {
-      metadata.image = meta.getAttribute('content') ?? undefined;
+      const imageUrl = meta.getAttribute('content') ?? undefined;
+      if (imageUrl) {
+        metadata.image = await validateImageUrl(imageUrl)
+          ? imageUrl
+          : '/no-image.png';
+      }
     }
     if (property === 'og:type') {
       metadata.type = meta.getAttribute('content') ?? undefined;
@@ -67,4 +72,25 @@ export function getFaviconUrl(pageUrl: string, size: 16 | 32 | 64 = 64) {
   return `https://www.google.com/s2/favicons?domain=${encodeURIComponent(
     pageUrl,
   )}&size=${size}`;
+}
+
+// 检查图片是否可访问
+async function validateImageUrl(imageUrl: string): Promise<boolean> {
+  try {
+    // 确保 URL 完整
+    if (imageUrl.startsWith('//')) {
+      imageUrl = 'https:' + imageUrl; // 自动补全协议
+    }
+    // 尝试请求图片头信息，检查是否可访问
+    const response = await fetch(imageUrl, {
+      method: 'HEAD',
+      next: { revalidate: 60 * 60 },
+    });
+
+    const contentType = response.headers.get('content-type');
+    return response.ok && contentType ? contentType.startsWith('image/') : false;
+  } catch (error) {
+    console.error(imageUrl, '访问发生错误', error);
+    return false;
+  }
 }
