@@ -6,9 +6,11 @@ import TOCRenderer from './TOC';
 import { CCInfo } from './CCInfo';
 import Link from 'next/link';
 import { formatDate } from '@/utils/posts';
-import { Clock, Save } from 'lucide-react';
+import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 type Props = {
   post: Article;
+  previousPost?: Article | null;
+  nextPost?: Article | null;
 };
 
 const Spacer = () => {
@@ -23,7 +25,7 @@ const Spacer = () => {
   );
 };
 
-const Post: FC<Props> = ({ post }) => {
+const Post: FC<Props> = ({ post, previousPost, nextPost }) => {
   return (
     <>
       <div className='bg-container animate-bg-img'>
@@ -82,6 +84,38 @@ const Post: FC<Props> = ({ post }) => {
                     </span>
                   </Link>
                 ))}
+              </div>
+              <div className="mt-8 grid gap-4 md:grid-cols-2">
+                {previousPost && (
+                  <Link 
+                    href={`/post/${previousPost.slug}`}
+                    className="border md:border-none p-4 bg-bg-card hover:bg-bg-card-hover duration-500 rounded-xl"
+                    aria-label="Older"
+                  >
+                    <div className="flex items-center text-sm text-secondary-text">
+                      <ChevronLeftIcon className='w-4 h-4' />
+                      <span>Older</span>
+                    </div>
+                    <h3 className="mt-2 line-clamp-2 text-lg font-medium text-primary-text">
+                      {previousPost.title}
+                    </h3>
+                  </Link>
+                )}
+                {nextPost && (
+                  <Link
+                    href={`/post/${nextPost.slug}`}
+                    className="border md:border-none p-4 bg-bg-card hover:bg-bg-card-hover duration-500 rounded-xl md:text-right"
+                    aria-label="Newer"
+                  >
+                    <div className="flex items-center text-sm text-secondary-text md:justify-end">
+                      <span>Newer</span>
+                      <ChevronRightIcon className='w-4 h-4' />
+                    </div>
+                    <h3 className="mt-2 line-clamp-2 text-lg font-medium text-primary-text">
+                      {nextPost.title}
+                    </h3>
+                  </Link>
+                )}
               </div>
             </div>
           </div>

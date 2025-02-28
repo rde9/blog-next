@@ -52,7 +52,11 @@ const PostPage: FC<{
 
   if (!post) notFound();
 
-  return <Post post={post} />;
+  const postIndex = allArticles.findIndex(a => a.slug === slug);
+  const previousPost = allArticles[postIndex + 1] || null;
+  const nextPost = allArticles[postIndex - 1] || null;
+
+  return <Post post={post} previousPost={previousPost} nextPost={nextPost} />;
 };
 
 export default PostPage;
