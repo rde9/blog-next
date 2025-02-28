@@ -158,12 +158,12 @@ const HeadingNode: FC<{ node: RootContentMap['heading'] }> = ({ node }) => {
 const TextNode: FC<{ node: RootContentMap['text'] }> = ({ node }) => {
   // 将文本内容按换行符分割成数组
   const lines = node.value.split('\n');
-  
+
   // 如果只有一行文本，直接返回
   if (lines.length === 1) {
     return node.value;
   }
-  
+
   // 如果有多行文本，在每行之间添加<br>标签
   return lines.map((line, index) => (
     // 对于最后一行，不需要添加<br>

@@ -51,7 +51,7 @@ const RichLinkCardInner: React.FC<Props> = async ({ href }) => {
         </div>
       </div>
       {metadata.image && (
-        <div className='hidden sm:block h-36 max-w-[2/5]'>
+        <div className='hidden h-36 max-w-[2/5] sm:block'>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             className='dark:img-dark-filter h-full w-full object-cover'

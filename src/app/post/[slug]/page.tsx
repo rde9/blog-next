@@ -52,7 +52,7 @@ const PostPage: FC<{
 
   if (!post) notFound();
 
-  const postIndex = allArticles.findIndex(a => a.slug === slug);
+  const postIndex = allArticles.findIndex((a) => a.slug === slug);
   const previousPost = allArticles[postIndex + 1] || null;
   const nextPost = allArticles[postIndex - 1] || null;
 

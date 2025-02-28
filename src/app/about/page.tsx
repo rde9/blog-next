@@ -24,7 +24,7 @@ const ExternalLink: FC<ExternalLinkProps> = ({ href, children }) => (
     href={href ?? ''}
     target='_blank'
     rel='noreferrer'
-    className='group inline-flex items-center no-underline transition-colors duration-300 font-rubik text-sm'
+    className='group inline-flex items-center font-rubik text-sm no-underline transition-colors duration-300'
   >
     <span className='text-gray-600 transition-colors duration-300 group-hover:text-gray-900 dark:text-gray-200 dark:group-hover:text-gray-300'>
       {children}
@@ -35,7 +35,6 @@ const ExternalLink: FC<ExternalLinkProps> = ({ href, children }) => (
     </span>
   </Link>
 );
-
 
 export default function About() {
   return (
@@ -117,7 +116,8 @@ export default function About() {
           角色设计: はるゐろは 様{' | '}
           <ExternalLink href='https://sakuraharuiroha.wixsite.com/haruiroha'>
             HomePage
-          </ExternalLink>{' · '}
+          </ExternalLink>
+          {' · '}
           <ExternalLink href='https://x.com/_Haruiroha'>
             X(Twitter)
           </ExternalLink>

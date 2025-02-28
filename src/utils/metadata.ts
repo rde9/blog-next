@@ -49,7 +49,7 @@ export async function fetchSiteMetadata(
     if (property === 'og:image') {
       const imageUrl = meta.getAttribute('content') ?? undefined;
       if (imageUrl) {
-        metadata.image = await validateImageUrl(imageUrl)
+        metadata.image = (await validateImageUrl(imageUrl))
           ? imageUrl
           : '/no-image.png';
       }
@@ -88,7 +88,9 @@ async function validateImageUrl(imageUrl: string): Promise<boolean> {
     });
 
     const contentType = response.headers.get('content-type');
-    return response.ok && contentType ? contentType.startsWith('image/') : false;
+    return response.ok && contentType
+      ? contentType.startsWith('image/')
+      : false;
   } catch (error) {
     console.error(imageUrl, '访问发生错误', error);
     return false;

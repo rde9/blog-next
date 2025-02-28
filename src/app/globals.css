@@ -9,36 +9,36 @@
   }
 
   :root {
-    --c-primary-100: #FCE1DC;
-    --c-primary-200: #F7C5BB;
-    --c-primary-300: #EF9986;
-    --c-primary-400: #DE654A;
-    --c-primary-500: #C54022;
-    --c-primary-600: #A33016;
-    --c-primary-700: #8A260F;
+    --c-primary-100: #fce1dc;
+    --c-primary-200: #f7c5bb;
+    --c-primary-300: #ef9986;
+    --c-primary-400: #de654a;
+    --c-primary-500: #c54022;
+    --c-primary-600: #a33016;
+    --c-primary-700: #8a260f;
 
-    --c-secondary-100: #FCE8DC;
-    --c-secondary-200: #F7D3BC;
-    --c-secondary-300: #F0AE86;
-    --c-secondary-400: #DE8249;
-    --c-secondary-500: #C45F21;
-    --c-secondary-600: #A34B15;
-    --c-secondary-700: #81380B;
+    --c-secondary-100: #fce8dc;
+    --c-secondary-200: #f7d3bc;
+    --c-secondary-300: #f0ae86;
+    --c-secondary-400: #de8249;
+    --c-secondary-500: #c45f21;
+    --c-secondary-600: #a34b15;
+    --c-secondary-700: #81380b;
 
-    --c-accent-100: #F7F7F2;
-    --c-accent-200: #ECF0D9;
-    --c-accent-300: #A3C5A9;
-    --c-accent-400: #5D9667;
-    --c-accent-500: #3B7544;
+    --c-accent-100: #f7f7f2;
+    --c-accent-200: #ecf0d9;
+    --c-accent-300: #a3c5a9;
+    --c-accent-400: #5d9667;
+    --c-accent-500: #3b7544;
 
-    --c-neutral-100: #FAF8F7;
-    --c-neutral-200: #E5E3E3;
-    --c-neutral-300: #D4CDCC;
-    --c-neutral-400: #A39998;
+    --c-neutral-100: #faf8f7;
+    --c-neutral-200: #e5e3e3;
+    --c-neutral-300: #d4cdcc;
+    --c-neutral-400: #a39998;
     --c-neutral-500: #736866;
     --c-neutral-600: #524542;
-    --c-neutral-700: #40312E;
-    --c-neutral-800: #26120E;
+    --c-neutral-700: #40312e;
+    --c-neutral-800: #26120e;
     --c-neutral-900: #170602;
 
     --c-title: var(--c-primary-500);
@@ -85,7 +85,7 @@
   }
 
   .page-heading {
-    @apply mb-4 mt-6 text-4xl font-fredoka font-semibold tracking-wider text-gray-800 dark:text-gray-200;
+    @apply mb-4 mt-6 font-fredoka text-4xl font-semibold tracking-wider text-gray-800 dark:text-gray-200;
     span {
       @apply text-link;
     }
@@ -116,7 +116,7 @@
   }
 
   .card-tag-item {
-    @apply rounded-2xl px-[.75em] py-[.25em] font-mono bg-bg-card-tag hover:my-shadow;
+    @apply hover:my-shadow rounded-2xl bg-bg-card-tag px-[.75em] py-[.25em] font-mono;
     &::before {
       @apply mr-1 font-rubik;
       content: '#';

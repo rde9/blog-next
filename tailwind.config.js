@@ -73,7 +73,7 @@ module.exports = {
         'button-active': 'var(--c-button-active)',
         'link-hover': 'var(--c-text-link-hover)',
         border: 'var(--c-border)',
-        'title': 'var(--c-title)',
+        title: 'var(--c-title)',
         'primary-text': 'var(--c-text-primary)',
         'secondary-text': 'var(--c-text-secondary)',
       },
@@ -113,7 +113,7 @@ module.exports = {
       },
       transitionProperty: {
         'bg-size': 'background-size',
-      }
+      },
     },
   },
   plugins: [require('@tailwindcss/typography')],

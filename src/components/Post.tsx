@@ -85,18 +85,18 @@ const Post: FC<Props> = ({ post, previousPost, nextPost }) => {
                   </Link>
                 ))}
               </div>
-              <div className="mt-8 grid gap-4 md:grid-cols-2">
+              <div className='mt-8 grid gap-4 md:grid-cols-2'>
                 {previousPost && (
-                  <Link 
+                  <Link
                     href={`/post/${previousPost.slug}`}
-                    className="border md:border-none p-4 bg-bg-card hover:bg-bg-card-hover duration-500 rounded-xl"
-                    aria-label="Older"
+                    className='rounded-xl border bg-bg-card p-4 duration-500 hover:bg-bg-card-hover md:border-none'
+                    aria-label='Older'
                   >
-                    <div className="flex items-center text-sm text-secondary-text">
-                      <ChevronLeftIcon className='w-4 h-4' />
+                    <div className='flex items-center text-sm text-secondary-text'>
+                      <ChevronLeftIcon className='h-4 w-4' />
                       <span>Older</span>
                     </div>
-                    <h3 className="mt-2 line-clamp-2 text-lg font-medium text-primary-text">
+                    <h3 className='mt-2 line-clamp-2 text-lg font-medium text-primary-text'>
                       {previousPost.title}
                     </h3>
                   </Link>
@@ -104,14 +104,14 @@ const Post: FC<Props> = ({ post, previousPost, nextPost }) => {
                 {nextPost && (
                   <Link
                     href={`/post/${nextPost.slug}`}
-                    className="border md:border-none p-4 bg-bg-card hover:bg-bg-card-hover duration-500 rounded-xl md:text-right"
-                    aria-label="Newer"
+                    className='rounded-xl border bg-bg-card p-4 duration-500 hover:bg-bg-card-hover md:border-none md:text-right'
+                    aria-label='Newer'
                   >
-                    <div className="flex items-center text-sm text-secondary-text md:justify-end">
+                    <div className='flex items-center text-sm text-secondary-text md:justify-end'>
                       <span>Newer</span>
-                      <ChevronRightIcon className='w-4 h-4' />
+                      <ChevronRightIcon className='h-4 w-4' />
                     </div>
-                    <h3 className="mt-2 line-clamp-2 text-lg font-medium text-primary-text">
+                    <h3 className='mt-2 line-clamp-2 text-lg font-medium text-primary-text'>
                       {nextPost.title}
                     </h3>
                   </Link>

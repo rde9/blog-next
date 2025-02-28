@@ -26,7 +26,7 @@ const ThemeSwitcher: FC = () => {
   return (
     <li className='relative flex'>
       <button
-        className='flex items-center px-2 lg:py-3 hover:text-link-hover'
+        className='flex items-center px-2 hover:text-link-hover lg:py-3'
         onClick={() => setMenuOpen(!menuOpen)}
         title='切换暗色模式'
       >
