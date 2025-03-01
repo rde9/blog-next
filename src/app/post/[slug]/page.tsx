@@ -15,11 +15,12 @@ export const generateStaticParams = async () => {
   return slugs.map((slug) => ({ slug }));
 };
 
-export const generateMetadata = async ({
-  params,
-}: {
-  params: Params;
-}): Promise<Metadata> => {
+export const generateMetadata = async (
+  props: {
+    params: Promise<Params>;
+  }
+): Promise<Metadata> => {
+  const params = await props.params;
   const post = getPost(params.slug);
 
   if (!post) return notFound();
@@ -45,8 +46,9 @@ export const generateMetadata = async ({
 };
 
 const PostPage: FC<{
-  params: Params;
-}> = async ({ params }) => {
+  params: Promise<Params>;
+}> = async (props) => {
+  const params = await props.params;
   const { slug } = params;
   const post = getPost(slug);
 

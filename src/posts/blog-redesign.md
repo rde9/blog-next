@@ -1,7 +1,7 @@
 ---
 title: '第三次博客重构记录'
 createdAt: '2024-03-02T00:00:00.000Z'
-updatedAt: '2025-02-27T00:00:00.000Z'
+updatedAt: '2025-03-01T00:00:00.000Z'
 photo: 'https://img.ayame.network/blog-redesign/banner.jpg'
 tags: ['life', 'BlogOps', 'WIP']
 summary: '一次处处踩坑的开发经历'
@@ -55,11 +55,16 @@ https://vike.dev/
 
 ## 文章存储：Contentlayer
 
-**注意：Contentlayer 已不再维护，对 Next.js 的支持停留在 13 版本(`peer next@"^12 || ^13"`)，在 14 版本中需要额外步骤才能安装，不推荐使用。**
+~~**注意：Contentlayer 已不再维护，对 Next.js 的支持停留在 13 版本(`peer next@"^12 || ^13"`)，在 14 版本中需要额外步骤才能安装，不推荐使用。**~~
 
 https://github.com/contentlayerdev/contentlayer/issues/429#issuecomment-1731298319
 
-Contentlayer 一大优点是 markdown 也可 HMR, 再也不用开个 markdown preview 窗口了。参考下面的文章进行配置：
+> update 2025.03.01
+> 幸运的是，有一个积极维护的 fork 项目，添加了对 Next.js 新版本的支持，且迁移过程非常简单。
+
+https://github.com/timlrx/contentlayer2
+
+Contentlayer 的一大优点是 markdown 也可 HMR, 再也不用开个 markdown preview 窗口了。参考下面的文章进行配置：
 
 https://blog.stin.ink/articles/introduce-contentlayer
 
@@ -88,6 +93,10 @@ https://blog.stin.ink/articles/replace-react-markdown-with-remark
 - RichLinkCard metadata `og:image` fallback(验证图片是否可访问)，并在小尺寸设备上隐藏图片预览
 
 Shiki 的高亮过程是异步的，因此 Markdown 渲染组件应该是一个 Server Component. 关于服务端渲染的问题我还不是特别清楚，所以这里略过。请参考 `src/plugins/remark-shiki.ts` 和 `src/components/Markdown.tsx`.
+
+> update 2025.03.01
+
+在 Claude 3.7 Sonnet 帮助下，使用全局缓存优化 Shiki 实例的创建，确保全局只有一个实例，避免重复创建。
 
 ## 数学公式渲染：KaTeX
 

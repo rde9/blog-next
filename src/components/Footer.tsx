@@ -12,6 +12,7 @@ const Footer: FC = () => {
             rde9
           </Link>
         </span>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src='/by-nc-sa.svg' alt='by-nc-sa' className='h-8' />
       </div>
     </footer>

@@ -62,6 +62,7 @@ const ImageModal: FC<ImgProps> = ({ url, title, alt }) => {
       {showModal && (
         <ClientPortal selector='portal' show={showModal}>
           <div className='modal-overlay fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black bg-opacity-70'>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={url}
               alt={alt || ''}

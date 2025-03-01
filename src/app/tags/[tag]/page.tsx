@@ -12,7 +12,8 @@ export const generateStaticParams = async () => {
   return tagsArray.map(([tag, _]) => ({ tag }));
 };
 
-const TagPageRedirect: FC<{ params: Params }> = ({ params }) => {
+const TagPageRedirect: FC<{ params: Promise<Params> }> = async (props) => {
+  const params = await props.params;
   const { tag } = params;
   redirect(`/tags/${tag}/1`);
 };

@@ -29,6 +29,9 @@ type Props = { children: string };
 let headingSlugArray: HeadingSlugArray;
 let headingCount: number, headingIndex: number;
 
+// 添加一个缓存对象，用于存储已经高亮过的代码
+const highlightCache: Record<string, string> = {};
+
 export const MarkdownRenderer: React.FC<Props> = async ({ children }) => {
   const parsed = parseMarkdown.parse(children);
   const mdastRoot = await parseMarkdown.run(parsed);
@@ -258,9 +261,14 @@ const StrongNode: FC<{ node: RootContentMap['strong'] }> = ({ node }) => {
 
 const CodeNode: FC<{ node: RootContentMap['code'] }> = async ({ node }) => {
   const lang = node.lang ?? 'plain';
-  const highlighted = await remarkShiki(node.value, lang);
-
-  return <div dangerouslySetInnerHTML={{ __html: highlighted }}></div>;
+  const cacheKey = `${lang}:${node.value}`;
+  
+  // 检查缓存中是否已有高亮结果
+  if (!highlightCache[cacheKey]) {
+    highlightCache[cacheKey] = await remarkShiki(node.value, lang);
+  }
+  
+  return <div dangerouslySetInnerHTML={{ __html: highlightCache[cacheKey] }}></div>;
 };
 
 const DeleteNode: FC<{ node: RootContentMap['delete'] }> = ({ node }) => {

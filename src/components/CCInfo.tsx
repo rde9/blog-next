@@ -46,6 +46,7 @@ export const CCInfo: React.FC<Props> = ({ imageUrl }) => {
       {imageUrl && (
         <div className='hidden max-w-[2/5] items-center sm:flex'>
           <div className='h-48'>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               className='dark:img-dark-filter left-2 h-full w-full object-cover'
               src={imageUrl}

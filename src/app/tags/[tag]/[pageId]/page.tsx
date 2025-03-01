@@ -34,7 +34,8 @@ export const generateStaticParams = async () => {
   });
 };
 
-export const generateMetadata = async ({ params }: { params: Params }) => {
+export const generateMetadata = async (props: { params: Promise<Params> }) => {
+  const params = await props.params;
   const { tag, pageId } = params;
 
   return {
@@ -49,7 +50,8 @@ export const generateMetadata = async ({ params }: { params: Params }) => {
   };
 };
 
-const TagPage: FC<{ params: Params }> = ({ params }) => {
+const TagPage: FC<{ params: Promise<Params> }> = async (props) => {
+  const params = await props.params;
   const { tag, pageId } = params;
   const posts = getPostsByTag(tag);
   const postGroups = getSortedPostsGroupedByYear(posts);

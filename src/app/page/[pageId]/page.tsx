@@ -26,8 +26,8 @@ export const generateStaticParams = async () => {
   return res;
 };
 
-const MainPage: FC<{ params: Params }> = ({ params }) => {
-  const { pageId } = params;
+const MainPage = async ({ params }: { params: Promise<Params> }) => {
+  const { pageId } = await params;
   const posts = getSortedPostsByPage(Number(pageId), perPage);
 
   // if (posts.length === 0 || Number(pageId) > pagesCount) {

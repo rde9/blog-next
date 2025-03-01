@@ -2,7 +2,7 @@
 /** @type {import('next').NextConfig} */
 
 import nextBundleAnalyzer from '@next/bundle-analyzer';
-import { withContentlayer } from './next-contentlayer.cjs';
+import { withContentlayer } from './next-contentlayer2.cjs';
 
 const withBundleAnalyzer = nextBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',

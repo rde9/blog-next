@@ -25,7 +25,8 @@ export const generateStaticParams = async () => {
   return res;
 };
 
-export const generateMetadata = async ({ params }: { params: Params }) => {
+export const generateMetadata = async (props: { params: Promise<Params> }) => {
+  const params = await props.params;
   const { pageId } = params;
 
   return {
@@ -40,7 +41,8 @@ export const generateMetadata = async ({ params }: { params: Params }) => {
   };
 };
 
-const Archives: FC<{ params: Params }> = ({ params }) => {
+const Archives: FC<{ params: Promise<Params> }> = async (props) => {
+  const params = await props.params;
   const { pageId } = params;
   const posts = getSortedPostsByPage(Number(pageId), perPage);
 
