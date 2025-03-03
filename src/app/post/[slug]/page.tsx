@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { FC } from 'react';
 import Post from '@/components/Post';
 import { notFound } from 'next/navigation';
-import { getPost } from '@/utils/posts';
+import { getPost, getSortedPosts } from '@/utils/posts';
 import { allArticles } from 'contentlayer/generated';
 
 type Params = {
@@ -54,9 +54,10 @@ const PostPage: FC<{
 
   if (!post) notFound();
 
-  const postIndex = allArticles.findIndex((a) => a.slug === slug);
-  const previousPost = allArticles[postIndex + 1] || null;
-  const nextPost = allArticles[postIndex - 1] || null;
+  const sortedPosts = getSortedPosts();
+  const currentIndex = sortedPosts.findIndex((p) => p.slug === slug);
+  const previousPost = currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null;
+  const nextPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
 
   return <Post post={post} previousPost={previousPost} nextPost={nextPost} />;
 };
