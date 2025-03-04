@@ -13,6 +13,7 @@ import { getHeadingSlugArray } from '@/utils/markdown';
 import type { HeadingSlugArray } from '@/utils/markdown';
 import ImageModal from './ImageModal';
 import { RichLinkCard } from './RichLinkCard';
+import { CodeBlock } from './CodeBlock';
 import 'katex/dist/katex.min.css';
 
 const parseMarkdown = remark()
@@ -268,7 +269,13 @@ const CodeNode: FC<{ node: RootContentMap['code'] }> = async ({ node }) => {
     highlightCache[cacheKey] = await remarkShiki(node.value, lang);
   }
   
-  return <div dangerouslySetInnerHTML={{ __html: highlightCache[cacheKey] }}></div>;
+  // 使用客户端组件渲染代码块
+  return (
+    <CodeBlock 
+      html={highlightCache[cacheKey]} 
+      code={node.value}
+    />
+  );
 };
 
 const DeleteNode: FC<{ node: RootContentMap['delete'] }> = ({ node }) => {
