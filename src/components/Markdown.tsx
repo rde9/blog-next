@@ -332,13 +332,21 @@ const BlockLinkNode: FC<{ node: RootContentMap['block-link'] }> = ({
 };
 
 const MathNode: FC<{ node: RootContentMap['math'] }> = ({ node }) => {
-  return <BlockMath math={node.value} />;
+  return (
+    <div className="math-block-container overflow-x-auto">
+      <BlockMath math={node.value} />
+    </div>
+  );
 };
 
 const InlineMathNode: FC<{ node: RootContentMap['inlineMath'] }> = ({
   node,
 }) => {
-  return <InlineMath math={node.value} />;
+  return (
+    <span className="inline-math-container overflow-x-auto">
+      <InlineMath math={node.value} />
+    </span>
+  );
 };
 
 //   const TwitterEmbedNode: FC<{ node: RootContentMap["twitter-embed"] }> = ({ node }) => {

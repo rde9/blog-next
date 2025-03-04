@@ -216,4 +216,30 @@
   .img-dark-filter {
     filter: brightness(0.8) contrast(1.2);
   }
+
+  /* KaTeX Responsive Styles */
+  .math-block-container {
+    @apply max-w-full;
+  }
+
+  .math-block-container .katex-display {
+    @apply overflow-x-auto overflow-hidden;
+  }
+
+  .inline-math-container .katex {
+    @apply overflow-x-auto overflow-hidden px-[1px];
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .math-block-container::-webkit-scrollbar,
+  .inline-math-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .math-block-container,
+  .inline-math-container {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
