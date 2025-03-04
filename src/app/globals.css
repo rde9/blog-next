@@ -204,6 +204,59 @@
       }
     }
   }
+
+  /* TOC 组件样式 */
+  .toc-list {
+    @apply m-0 p-0 list-none w-full;
+  }
+
+  .toc-list a {
+    @apply block py-2 text-inherit no-underline border-b border-opacity-20 transition-all duration-200 ease-in-out;
+    border-bottom-color: rgba(229, 231, 235, 0.2);
+  }
+
+  .toc-list a:hover {
+    @apply pl-2;
+  }
+
+  /* TOC容器结构 */
+  .toc-container {
+    @apply relative w-full;
+  }
+
+  .toc-position-reference {
+    @apply absolute top-0 left-0 w-full h-[1px] invisible;
+  }
+
+  .toc-sticky-container {
+    @apply w-full transition-all duration-300 ease-in-out;
+  }
+
+  /* 固定状态 */
+  .toc-is-sticky {
+    @apply fixed top-0 left-0 right-0 z-50 mx-auto shadow-md;
+    max-width: calc(100% - 2rem);
+  }
+
+  /* 固定且打开状态 */
+  .toc-is-sticky.toc-is-open .js-toc-content {
+    @apply block max-h-[50vh] overflow-y-auto;
+  }
+
+  /* 圆角处理 */
+  .toc-is-sticky .js-toc-toggle {
+    @apply rounded-none;
+  }
+
+  .toc-is-sticky .js-toc-content {
+    @apply rounded-b-lg;
+  }
+
+  @media (max-width: 640px) {
+    .toc-is-sticky {
+      max-width: calc(100% - 1rem) !important;
+    }
+  }
 }
 
 @layer utilities {

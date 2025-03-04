@@ -5,6 +5,7 @@ import remarkFrontmatter from 'remark-frontmatter';
 import remarkGfm from 'remark-gfm';
 import { remarkPlaceholder } from '@/plugins/remark-placeholder';
 import { getHeadingSlugArray, type HeadingSlugArray } from '@/utils/markdown';
+import MobileTOC from './MobileTOC';
 
 type Props = { children: string };
 
@@ -40,7 +41,7 @@ const TOCRenderer: FC<Props> = async ({ children }) => {
     if (items.length === 0) return null;
 
     return (
-      <ul>
+      <ul className="toc-list w-full">
         {items.map((item, index) => {
           const level = item.depth as keyof typeof indentation;
           const padding = indentation[level] ?? '';
@@ -49,7 +50,7 @@ const TOCRenderer: FC<Props> = async ({ children }) => {
             <li key={index} className={`${padding} ${textSize}`}>
               <a
                 href={`#${item.slug}`}
-                className='block py-1 hover:text-primary-500'
+                className="hover:text-primary-500"
               >
                 {item.value}
               </a>
@@ -59,10 +60,18 @@ const TOCRenderer: FC<Props> = async ({ children }) => {
       </ul>
     );
   };
+  
   return (
-    <aside id='toc-content'>
-      <h2 className='mb-3 text-3xl font-bold'>目录</h2>
-      {renderItems(headingSlugArray)}
+    <aside id='toc-content' className="w-full">
+      {/* Desktop TOC - Always visible on large screens */}
+      <div className='hidden lg:block w-full opacity-65 hover:opacity-100 transition-opacity duration-300'>
+        {renderItems(headingSlugArray)}
+      </div>
+      
+      {/* Mobile TOC - Collapsible on small screens */}
+      <div className='lg:hidden'>
+        <MobileTOC headingSlugArray={headingSlugArray} />
+      </div>
     </aside>
   );
 };

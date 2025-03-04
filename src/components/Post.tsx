@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Article } from 'contentlayer/generated';
 import { MarkdownRenderer } from './Markdown';
 import TOCRenderer from './TOC';
+import MobileTOCToggle from './MobileTOCToggle';
 import { CCInfo } from './CCInfo';
 import Link from 'next/link';
 import { formatDate } from '@/utils/posts';
@@ -64,6 +65,12 @@ const Post: FC<Props> = ({ post, previousPost, nextPost }) => {
       <div className='post-container mt-4 animate-main'>
         <div className='gap-4 lg:grid lg:grid-cols-[minmax(36rem,_2.5fr)_1.25fr]'>
           <div id='grid-main' className='xl:max-w-none'>
+            {/* Mobile TOC - Shown at the top of content on small screens */}
+            <div className='mb-6 mx-2 lg:hidden'>
+              <TOCRenderer>{post.body.raw}</TOCRenderer>
+              <MobileTOCToggle />
+            </div>
+            
             <div id='markdown-card' className='px-2 py-6'>
               <div
                 id='markdown-wrapper'
@@ -121,11 +128,11 @@ const Post: FC<Props> = ({ post, previousPost, nextPost }) => {
           </div>
           <div
             id='grid-right'
-            className='hidden break-all lg:flex print:hidden'
+            className='hidden lg:flex print:hidden w-full'
           >
             <div
               id='toc-card'
-              className='sticky top-6 max-h-[calc(-10rem+100vh)] self-start overflow-auto border-l-[1px] border-dotted px-4 py-6'
+              className='sticky top-6 max-h-[calc(-10rem+100vh)] w-full self-start overflow-auto border-l-[1px] border-dotted px-4 py-6'
               style={{ scrollbarWidth: 'thin' }}
             >
               <TOCRenderer>{post.body.raw}</TOCRenderer>
