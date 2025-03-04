@@ -78,12 +78,6 @@ module.exports = {
         'secondary-text': 'var(--c-text-secondary)',
       },
       fontFamily: {
-        sriracha: [
-          'var(--font-sriracha)',
-          'var(--font-noto-sans-sc)',
-          'ui-sans-serif',
-          'sans-serif',
-        ],
         rubik: ['var(--font-rubik)', 'ui-sans-serif', 'sans-serif'],
         fredoka: ['var(--font-fredoka)', 'ui-sans-serif', 'sans-serif'],
       },

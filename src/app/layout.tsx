@@ -3,7 +3,6 @@ import { ThemeProvider } from 'next-themes';
 import {
   Noto_Sans_SC,
   JetBrains_Mono,
-  Sriracha,
   Rubik,
   Fredoka,
 } from 'next/font/google';
@@ -13,13 +12,6 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Content from '@/components/Content';
 import ScrollToTop from '@/components/ScrollToTop';
-
-const sriracha = Sriracha({
-  weight: '400',
-  display: 'swap',
-  subsets: ['latin'],
-  variable: '--font-sriracha',
-});
 
 const rubik = Rubik({
   display: 'swap',
@@ -76,7 +68,7 @@ export default function RootLayout({
   return (
     <html
       lang='zh-CN'
-      className={`${jbmono.variable} ${notosanssc.variable} ${sriracha.variable} ${rubik.variable} ${fredoka.variable}`}
+      className={`${jbmono.variable} ${notosanssc.variable} ${rubik.variable} ${fredoka.variable}`}
       suppressHydrationWarning
     >
       <body className='selection:bg-selected selection:text-bg'>

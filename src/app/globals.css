@@ -193,7 +193,7 @@
     }
 
     .inline-code {
-      @apply m-[0.125rem] inline-block rounded-md bg-gray-300/30 px-1 py-0.5 font-sriracha font-normal;
+      @apply m-[0.125rem] inline-block rounded-md bg-gray-300/30 px-1 py-0.5 font-mono font-normal;
       background-color: var(--c-inline-code-bg);
       /* color: var(--c-inline-code-text); */
       &::before {
