@@ -1,10 +1,69 @@
 ---
 title: '算法设计与分析 综合面试之程序设计'
 createdAt: '2025-03-21T14:00:00.000Z'
+updatedAt: '2025-03-23T14:00:00.000Z'
 photo: 'https://img.ayame.network/learn-kaoyan-2nd-exam-algo-oj/title.png'
 tags: ['algorithm']
 summary: '🐂😈'
 ---
+
+# Dev-C++ 常用快捷键
+
+- `Ctrl + D` 删除当前一行
+- `Ctrl + E` 复制当前一行
+- `F11` 编译运行
+- `Ctrl + Space` 触发代码补全
+- `Ctrl + /` 注释当前行
+
+# 基础算法与基础C++
+
+## 不定长度输入
+
+> 输入包含多组测试数据。
+> 每组数据占一行，包含一个整数n。
+
+```cpp
+#include<cstdio>
+
+int main() {
+  int n;
+  while(scanf("%d", &n) != EOF) {
+    // 处理n
+  }
+  return 0;
+}
+```
+
+## 最大公约数gcd/最小公倍数lcm
+
+```cpp
+int gcd(int a, int b) {
+  return b == 0 ? a : gcd(b, a % b);
+}
+
+int lcm(int a, int b) {
+  return a * b / gcd(a, b);
+}
+```
+
+## 素数筛
+
+P3383 【模板】线性筛素数 https://www.luogu.com.cn/problem/P3383
+思想：打表法，用一个数组记录每个数是否为素数
+
+```cpp
+bool table[10000010];
+void LIST_TABLE(int n){
+    for(int i=0;i<=n;i++) table[i]=true; // 初始化，把所有数当成素数
+    table[0]=table[1]=false; // 0和1不是素数
+    for(int i=2;i<=n;i++){ // 从2开始，枚举每个数
+        if(!table[i])continue; // 如果不是素数，跳过
+        for(int j=i*2;j<=n;j+=i){ // 如果是素数，那么它的倍数都不是素数
+            table[j]=false;
+        }
+    }
+}
+```
 
 # 第五章 分治法
 
