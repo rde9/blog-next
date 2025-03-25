@@ -234,7 +234,7 @@
   }
 
   .toc-list a {
-    @apply block py-2 text-inherit no-underline border-b border-opacity-20 transition-all duration-200 ease-in-out;
+    @apply block py-2 pr-2 text-inherit no-underline border-b border-opacity-20 transition-all duration-200 ease-in-out;
     border-bottom-color: rgba(229, 231, 235, 0.2);
   }
 
