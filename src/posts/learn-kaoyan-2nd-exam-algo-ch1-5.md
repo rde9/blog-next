@@ -1,7 +1,7 @@
 ---
 title: '算法设计与分析（陈慧南）Ch1~5'
 createdAt: '2025-03-16T14:00:00.000Z'
-updatedAt: '2025-03-24T14:00:00.000Z'
+updatedAt: '2025-03-25T14:00:00.000Z'
 photo: 'https://img.ayame.network/learn-kaoyan-2nd-exam-algo-ch1-5/ch1-5.png'
 tags: ['algorithm']
 summary: '第一～五章 算法基础、时间复杂度、分治法'
@@ -84,6 +84,7 @@ $T(n) = \left \{
 ## 2.4 给一段代码，求时间复杂度
 
 类似408选择题第一题，中间过程写的言之有理即可
+[25考研？那408第一题你已经拿下了。408时间复杂度的几个经典考法](https://www.bilibili.com/video/BV1jC411Y72k)
 
 ### 2.4.1 单循环
 
