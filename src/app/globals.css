@@ -139,9 +139,9 @@
       @apply mt-0;
     }
 
+    h1,
     h2,
-    h3,
-    h4 {
+    h3 {
       @apply tracking-tight;
       &::after {
         @apply relative text-sm opacity-30;
@@ -150,16 +150,12 @@
       }
     }
 
-    h2::after {
-      content: 'h1';
+    h1 {
+      @apply mt-8 mb-6 font-bold;
     }
 
-    h3::after {
-      content: 'h2';
-    }
-
-    h4::after {
-      content: 'h3';
+    h2 {
+      @apply mt-6 mb-4 font-semibold;
     }
 
     hr {
