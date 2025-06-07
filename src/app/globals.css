@@ -53,15 +53,21 @@
     --c-card-tag-bg: var(--c-secondary-100);
     --c-button-active: var(--c-secondary-400);
     --c-selected: var(--c-neutral-500);
-    --c-inline-code-bg: var(--c-neutral-200);
+    --c-inline-code-bg: #f4e8e0;
+    --c-inline-code-text: #9e3f00;
+    --c-pre-code: #383a42;
+    --c-pre-bg: #fcfcfc;
+    --c-pre-border: #e8e8e8;
+    --c-pre-attr: #bfc7cf;
+    --c-pre-copy-button: #788194;
     --shadow-color: 0deg 0% 50%;
 
     &.dark {
       --c-title: #e6edf2;
       --c-text-primary: #e5e7eb;
       --c-text-secondary: #b5b7bb;
-      --c-bg: #222222;
-      --c-bg-card: #3b3b3b;
+      --c-bg: #161618;
+      --c-bg-card: #242628;
       --c-bg-card-hover: #3b3b3b;
       --c-border: #cacfc9;
       --c-text-link: #ff857f;
@@ -69,7 +75,13 @@
       --c-card-tag-bg: #222222;
       --c-button-active: #cacfc9;
       --c-selected: #cacfc9;
-      --c-inline-code-bg: #767975;
+      --c-inline-code-bg: #2a211f;
+      --c-inline-code-text: #f7aa7d;
+      --c-pre-code: #d1d5db;
+      --c-pre-bg: #111111;
+      --c-pre-border: #3b3b3b;
+      --c-pre-attr: #525355;
+      --c-pre-copy-button: #525355;
       --shadow-color: 0deg 0% 50%;
     }
   }
@@ -105,7 +117,7 @@
   }
 
   .post-container {
-    @apply sm:mx-12 sm:px-4 md:mx-24 lg:mx-auto lg:max-w-[60rem] 2xl:max-w-[72rem];
+    @apply dark:text-title sm:mx-12 sm:px-4 md:mx-24 lg:mx-auto lg:max-w-[60rem] 2xl:max-w-[72rem];
   }
 
   .post-card {
@@ -142,7 +154,7 @@
     h1,
     h2,
     h3 {
-      @apply tracking-tight;
+      @apply tracking-tight dark:text-title;
       &::after {
         @apply relative text-sm opacity-30;
         left: 0.35em;
@@ -151,11 +163,11 @@
     }
 
     h1 {
-      @apply mt-8 mb-6 font-bold;
+      @apply mb-6 mt-8 font-bold;
     }
 
     h2 {
-      @apply mt-6 mb-4 font-semibold;
+      @apply mb-4 mt-6 font-semibold;
     }
 
     hr {
@@ -170,9 +182,9 @@
     }
 
     pre {
-      @apply relative overflow-auto p-0;
+      @apply relative overflow-auto border border-pre-border bg-pre-bg p-0 text-pre-code;
       &::after {
-        @apply pointer-events-none absolute right-4 top-2 select-none text-3xl font-bold uppercase text-bg opacity-40 dark:text-secondary-text;
+        @apply pointer-events-none absolute right-4 top-2 select-none text-3xl font-bold uppercase text-pre-attr transition-opacity duration-200 ease-in-out;
         content: attr(data-language);
       }
     }
@@ -191,7 +203,7 @@
     .inline-code {
       @apply m-[0.125rem] inline-block rounded-md bg-gray-300/30 px-1 py-0.5 font-mono font-normal;
       background-color: var(--c-inline-code-bg);
-      /* color: var(--c-inline-code-text); */
+      color: var(--c-inline-code-text);
       &::before {
         content: none;
       }
@@ -199,7 +211,7 @@
         content: none;
       }
     }
-    
+
     /* Code block with copy button styles */
     .codeblock-container {
       @apply relative;
@@ -209,6 +221,10 @@
       @apply opacity-100;
     }
 
+    .codeblock-container:hover pre::after {
+      @apply opacity-10;
+    }
+
     /* Make sure the code block container doesn't interfere with shiki's styling */
     .codeblock-container > div:first-of-type {
       @apply m-0 p-0;
@@ -216,25 +232,46 @@
 
     /* Ensure pre tags inside the container have proper styling */
     .codeblock-container pre {
-      @apply m-0 rounded-md overflow-auto;
+      @apply m-0 overflow-auto rounded-md;
     }
 
     .copy-button {
-      @apply absolute top-2 right-2 p-2 rounded bg-gray-700/80 hover:bg-gray-600/90 text-white opacity-0 leading-4 transition-all duration-200 ease-in-out cursor-pointer;
+      @apply absolute right-2 top-2 cursor-pointer rounded bg-pre-copy-button p-2 leading-4 text-white opacity-0 transition-all duration-200 ease-in-out;
     }
 
     .copied {
-      @apply bg-green-600/80 hover:bg-green-600/90;
+      /* @apply bg-green-600/80 hover:bg-green-600/90; */
+    }
+
+    /* Code loading state styles */
+    .code-loading {
+      @apply relative overflow-auto border border-pre-border bg-pre-bg p-0;
+      opacity: 0.7;
+    }
+
+    .code-loading code {
+      @apply block overflow-x-auto px-4 py-3 text-secondary-text;
+    }
+
+    /* Smooth transition for theme switching */
+    .codeblock-container {
+      transition: all 0.3s ease-in-out;
+    }
+
+    .codeblock-container pre {
+      transition:
+        background-color 0.3s ease-in-out,
+        border-color 0.3s ease-in-out;
     }
   }
 
   /* TOC 组件样式 */
   .toc-list {
-    @apply m-0 p-0 list-none w-full;
+    @apply m-0 w-full list-none p-0;
   }
 
   .toc-list a {
-    @apply block py-2 pr-2 text-inherit no-underline border-b border-opacity-20 transition-all duration-200 ease-in-out;
+    @apply block border-b border-opacity-20 py-2 pr-2 text-inherit no-underline transition-all duration-200 ease-in-out;
     border-bottom-color: rgba(229, 231, 235, 0.2);
   }
 
@@ -248,7 +285,7 @@
   }
 
   .toc-position-reference {
-    @apply absolute top-0 left-0 w-full h-[1px] invisible;
+    @apply invisible absolute left-0 top-0 h-[1px] w-full;
   }
 
   .toc-sticky-container {
@@ -257,7 +294,7 @@
 
   /* 固定状态 */
   .toc-is-sticky {
-    @apply fixed top-0 left-0 right-0 z-50 mx-auto shadow-md;
+    @apply fixed left-0 right-0 top-0 z-50 mx-auto shadow-md;
     max-width: calc(100% - 2rem);
   }
 
@@ -299,11 +336,11 @@
   }
 
   .math-block-container .katex-display {
-    @apply overflow-x-auto overflow-hidden;
+    @apply overflow-hidden overflow-x-auto;
   }
 
   .inline-math-container .katex {
-    @apply overflow-x-auto overflow-hidden px-[1px];
+    @apply overflow-hidden overflow-x-auto px-[1px];
   }
 
   /* Hide scrollbar for Chrome, Safari and Opera */

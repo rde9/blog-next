@@ -6,7 +6,6 @@ import remarkFrontmatter from 'remark-frontmatter';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import { InlineMath, BlockMath } from 'react-katex';
-import { remarkShiki } from '@/plugins/remark-shiki';
 import { remarkBlockLink } from '@/plugins/remark-block-link';
 import { remarkPlaceholder } from '@/plugins/remark-placeholder';
 import { getHeadingSlugArray } from '@/utils/markdown';
@@ -29,9 +28,6 @@ type Props = { children: string };
 
 let headingSlugArray: HeadingSlugArray;
 let headingCount: number, headingIndex: number;
-
-// 添加一个缓存对象，用于存储已经高亮过的代码
-const highlightCache: Record<string, string> = {};
 
 export const MarkdownRenderer: React.FC<Props> = async ({ children }) => {
   const parsed = parseMarkdown.parse(children);
@@ -260,22 +256,11 @@ const StrongNode: FC<{ node: RootContentMap['strong'] }> = ({ node }) => {
   );
 };
 
-const CodeNode: FC<{ node: RootContentMap['code'] }> = async ({ node }) => {
+const CodeNode: FC<{ node: RootContentMap['code'] }> = ({ node }) => {
   const lang = node.lang ?? 'plain';
-  const cacheKey = `${lang}:${node.value}`;
-  
-  // 检查缓存中是否已有高亮结果
-  if (!highlightCache[cacheKey]) {
-    highlightCache[cacheKey] = await remarkShiki(node.value, lang);
-  }
-  
-  // 使用客户端组件渲染代码块
-  return (
-    <CodeBlock 
-      html={highlightCache[cacheKey]} 
-      code={node.value}
-    />
-  );
+
+  // 传递原始代码和语言到客户端组件进行高亮处理
+  return <CodeBlock code={node.value} lang={lang} />;
 };
 
 const DeleteNode: FC<{ node: RootContentMap['delete'] }> = ({ node }) => {
@@ -340,7 +325,7 @@ const BlockLinkNode: FC<{ node: RootContentMap['block-link'] }> = ({
 
 const MathNode: FC<{ node: RootContentMap['math'] }> = ({ node }) => {
   return (
-    <div className="math-block-container overflow-x-auto">
+    <div className='math-block-container overflow-x-auto'>
       <BlockMath math={node.value} />
     </div>
   );
@@ -350,7 +335,7 @@ const InlineMathNode: FC<{ node: RootContentMap['inlineMath'] }> = ({
   node,
 }) => {
   return (
-    <span className="inline-math-container overflow-x-auto">
+    <span className='inline-math-container overflow-x-auto'>
       <InlineMath math={node.value} />
     </span>
   );

@@ -76,6 +76,11 @@ module.exports = {
         title: 'var(--c-title)',
         'primary-text': 'var(--c-text-primary)',
         'secondary-text': 'var(--c-text-secondary)',
+        'pre-code': 'var(--c-pre-code)',
+        'pre-bg': 'var(--c-pre-bg)',
+        'pre-border': 'var(--c-pre-border)',
+        'pre-attr': 'var(--c-pre-attr)',
+        'pre-copy-button': 'var(--c-pre-copy-button)',
       },
       fontFamily: {
         rubik: ['var(--font-rubik)', 'ui-sans-serif', 'sans-serif'],

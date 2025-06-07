@@ -40,7 +40,7 @@ async function getHighlighter(): Promise<Highlighter> {
     }
     return globalCache.highlighter;
   }
-  
+
   // 如果正在初始化，等待初始化完成
   if (globalCache.initPromise) {
     if (process.env.NODE_ENV === 'development') {
@@ -48,47 +48,53 @@ async function getHighlighter(): Promise<Highlighter> {
     }
     return globalCache.initPromise;
   }
-  
+
   if (process.env.NODE_ENV === 'development') {
     console.log('[Shiki] Creating new highlighter instance');
   }
-  
+
   // 创建新的初始化 Promise
   globalCache.initPromise = createHighlighter({
-    themes: ['one-dark-pro'],
+    themes: ['one-light', 'one-dark-pro'],
     langs: supportedLangs,
   });
-  
+
   try {
     // 等待初始化完成并缓存结果
     globalCache.highlighter = await globalCache.initPromise;
     globalCache.instanceCount++;
-    
+
     if (process.env.NODE_ENV === 'development') {
-      console.log(`[Shiki] Highlighter instance created (total: ${globalCache.instanceCount})`);
+      console.log(
+        `[Shiki] Highlighter instance created (total: ${globalCache.instanceCount})`,
+      );
     }
-    
+
     return globalCache.highlighter;
   } catch (error) {
     // 初始化失败，清除 Promise
     globalCache.initPromise = null;
-    
+
     if (process.env.NODE_ENV === 'development') {
       console.error('[Shiki] Failed to create highlighter instance:', error);
     }
-    
+
     throw error;
   }
 }
 
-export async function remarkShiki(code: string, lang: string): Promise<string> {
+export async function remarkShiki(
+  code: string,
+  lang: string,
+  theme: 'one-light' | 'one-dark-pro' = 'one-light',
+): Promise<string> {
   // 获取或创建 highlighter 实例
   const highlighter = await getHighlighter();
-  
+
   // 使用 highlighter 高亮代码
   return highlighter.codeToHtml(code, {
     lang,
-    theme: 'one-dark-pro',
+    theme,
     transformers: [
       {
         pre(node) {
@@ -106,7 +112,7 @@ export function disposeHighlighter(): void {
     if (process.env.NODE_ENV === 'development') {
       console.log('[Shiki] Disposing highlighter instance');
     }
-    
+
     globalCache.highlighter.dispose();
     globalCache.highlighter = null;
     globalCache.instanceCount--;
