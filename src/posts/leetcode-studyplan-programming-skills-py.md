@@ -1,7 +1,7 @@
 ---
 title: 'LeetCode 题库：编程基础 0 到 1（Python3实现）'
 createdAt: '2025-06-06T14:00:00.000Z'
-updatedAt: '2025-06-06T14:00:00.000Z'
+updatedAt: '2025-06-07T14:00:00.000Z'
 photo: 'https://img.ayame.network/leetcode-studyplan-programming-skills-py/programming-skills.png'
 tags: ['algorithm']
 summary: 'Python 从 0 到 0.1：GPT 带练版'
@@ -727,6 +727,19 @@ class Solution:
   - `coord += inc[direc]` 实际效果是列表扩展（等价于 `coord.extend(inc[direc])`，得到 `[0, 0, 0, 1]`），而不是向量加法。
   - 正确写法是分开相加：`coord[0] += inc[direc][0]` `coord[1] += inc[direc][1]`
 
+### 拓展（向量加法）
+
+- 不仅列表的相加不是向量加法，元组的相加**也不是**向量加法
+  - 区别在于，列表相加是原地扩展，元组相加是创建了一个新的元组
+- **Q：什么情况下加号是向量加法？**
+  - `numpy` 库的 `array`
+```py
+import numpy as np
+a = np.array([0, 0])
+b = np.array([1, 1])
+print(a + b)  # [1 1]
+```
+
 # 矩阵
 
 ## 1672. 最富有客户的资产总量
@@ -959,3 +972,334 @@ class Solution:
 - 在 1 到 n 的所有数中，奇数的个数是 `n // 2`（n为偶）或 `(n // 2) + 1`（n为奇）
 - 用一个式子概括：`(n + 1) // 2`
 - 所以，`[low, high]` 区间内的奇数个数 = `1~high` 的奇数个数 - `1~(low-1)` 的奇数个数
+
+## 1491. 去掉最低工资和最高工资后的工资平均值
+
+### \#1
+
+```py
+class Solution:
+    def average(self, salary: List[int]) -> float:
+        minn, maxx = 0x3f3f3f3f, -1
+        for s in salary:
+            minn = min(minn, s)
+            maxx = max(maxx, s)
+        return (sum(salary) - maxx - minn) / (len(salary) - 2)
+```
+
+### \#GPT
+```py
+class Solution:
+    def average(self, salary: List[int]) -> float:
+        return (sum(salary) - min(salary) - max(salary)) / (len(salary) - 2)
+```
+
+### 学习要点（min, max）
+
+- `min()` 和 `max()` 可以直接用在列表上，同样是 $O(n)$ 时间复杂度
+
+
+## 860. 柠檬水找零
+
+### \#1
+
+```py
+class Solution:
+    def lemonadeChange(self, bills: List[int]) -> bool:
+        held_5 = 0
+        held_10 = 0
+        for bill in bills:
+            if bill == 5:
+                held_5 += 1
+            elif bill == 10:
+                held_5 -= 1
+                held_10 += 1
+            elif bill == 20:
+                if held_10 > 0:
+                    held_10 -= 1
+                    held_5 -= 1
+                else:
+                    held_5 -= 3
+            if held_5 < 0 or held_10 < 0:
+                return False
+        return True
+```
+
+- 贪心法，优先用 10 元钞票找零
+
+## 976. 三角形的最大周长
+
+### \#1
+
+```py
+class Solution:
+    def largestPerimeter(self, nums: List[int]) -> int:
+        res = 0
+        n = len(nums)
+        nums.sort()
+        for i in range(n-1, 1, -1):
+            if nums[i-2] + nums[i-1] > nums[i]:
+                res = nums[i-2] + nums[i-1] + nums[i]
+                break # 第一个满足条件的就是最优解
+        return res
+```
+
+- 贪心法，从大到小排序，找到第一个满足三角形不等式的三元组
+
+## 1232. 缀点成线
+
+### \#1 (RE，除零错)
+
+```py
+class Solution:
+    def checkStraightLine(self, coordinates: List[List[int]]) -> bool:
+        p0 = [coordinates[0][0], coordinates[0][1]]
+        p1 = [coordinates[1][0], coordinates[1][1]]
+        v = [p1[0] - p0[0], p1[1] - p0[1]]
+        for coord in coordinates[2:]:
+            vec = [coord[0] - p0[0], coord[1] - p0[1]]
+            if float(vec[0]) / v[0] != float(vec[1]) / v[1]:
+                return False
+        return True
+```
+
+- 这个方法可能用了向量，但用了向量有点不太可能
+
+### \#GPT
+
+```py
+class Solution:
+    def checkStraightLine(self, coordinates: List[List[int]]) -> bool:
+        x0, y0 = coordinates[0]
+        x1, y1 = coordinates[1]
+        dx, dy = x1 - x0, y1 - y0
+        for x, y in coordinates[2:]:
+            # (x - x0, y - y0) 与 (dx, dy) 共线，叉积等于0
+            if (x - x0) * dy != (y - y0) * dx:
+                return False
+        return True
+```
+
+- 正宗的向量叉积
+
+### 学习要点（叉积）
+
+- `x0, y0 = coordinates[0]` 要比 `p0 = [coordinates[0][0], coordinates[0][1]]` 更简洁
+- 向量叉积：`(x1, y1) × (x2, y2) = x1 * y2 - x2 * y1`
+  - 叉积为 0，两个向量共线
+
+## 67. 二进制求和
+
+### \#1
+
+```py
+class Solution:
+    def addBinary(self, a: str, b: str) -> str:
+        m, n = len(a), len(b)
+        x, y = 0, 0
+        for i, s in enumerate(a[::-1]):
+            x += (int(s) << i)
+        for i, s in enumerate(b[::-1]):
+            y += (int(s) << i)
+        return str(bin(x + y))[2:]
+```
+
+- 手动转整数相加再转回字符串
+
+### \#GPT
+
+```py
+class Solution:
+    def addBinary(self, a: str, b: str) -> str:
+        return bin(int(a, 2) + int(b, 2))[2:]
+```
+
+### 学习要点（进制转换；format）
+
+- `class int(string, /, base=10)` 自带进制转换功能，用 `base` 参数指定进制
+- `bin(x)` 返回 `0b` 开头的二进制字符串
+- 除了用 `[2:]` 截取，还可以用 `format(value, format_spec='')` 指定输出格式
+  - `format(10, 'b')` 返回 `1010`
+  - `format(10, '#b')` 返回 `0b1010`
+
+## 43. 字符串相乘（暂时跳过）
+
+跳过
+
+## 50. Pow(x, n)
+
+### \#1
+
+```py
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
+        res = 1
+        if n < 0:
+            x = 1 / x
+            n = -n
+        while n:
+            if n & 1: # 最低位为1
+                res *= x
+            x *= x
+            n >>= 1
+        return res
+```
+
+### 学习要点（快速幂）
+
+- [50. Pow(x, n) 快速幂 清晰图解](https://leetcode.cn/problems/powx-n/solutions/241471/50-powx-n-kuai-su-mi-qing-xi-tu-jie-by-jyd/)
+
+# 链表
+
+## 21. 合并两个有序链表
+
+### \#GPT
+
+```py
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode()
+        cur = dummy
+        while list1 and list2:
+            if list1.val < list2.val:
+                cur.next = list1 # 加入一个节点
+                list1 = list1.next
+            else:
+                cur.next = list2 # 加入一个节点
+                list2 = list2.next
+            cur = cur.next # 把 cur 指向新加的节点
+        cur.next = list1 if list1 else list2 # 拼接剩余部分
+        return dummy.next
+```
+
+### 学习要点（Optional；虚拟头节点）
+
+- `typing.Optional`
+  - `Optional[X]` 等价于 `X | None`
+- `dummy` 虚拟头节点，简化边界情况处理
+
+
+## 206. 反转链表
+
+### \#GPT 头插法
+
+```py
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode()
+        while head:
+            next_node = head.next     # 先保存原链表的下一个节点
+            head.next = dummy.next    # 头插法：新节点指向当前反转链表头
+            dummy.next = head         # dummy头指向新节点
+            head = next_node          # 继续处理下一个节点
+        return dummy.next
+```
+
+### \#GPT 双指针法
+
+```py
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        prev, curr = None, head
+        while curr:
+            nxt = curr.next # 暂存下一个节点
+            curr.next = prev # 反转：当前节点指向前一个节点
+            prev = curr # 更新前一个节点
+            curr = nxt # 继续处理下一个节点
+        return prev
+```
+
+## 2. 两数相加
+
+### \#1 （AC但繁琐）
+
+```py
+class Solution:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode()
+        cur = dummy
+        carry = False
+        while l1 and l2: # 两个链表都非空
+            d = l1.val + l2.val + carry
+            carry = d > 9
+            d %= 10
+            l1 = l1.next
+            l2 = l2.next
+            cur.next = ListNode(d)
+            cur = cur.next
+        l3 = l1 if l1 else l2 # 剩余部分
+        while carry and l3:
+            d = l3.val + carry
+            carry = d > 9
+            d %= 10
+            l3 = l3.next
+            cur.next = ListNode(d)
+            cur = cur.next
+        if l3: # 还有剩余
+            cur.next = l3
+        if carry: # 还有进位
+            cur.next = ListNode(1)
+        return dummy.next
+```
+
+### \#GPT
+
+```py
+class Solution:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode()
+        cur = dummy
+        carry = 0
+        while l1 or l2 or carry:
+            v1 = l1.val if l1 else 0
+            v2 = l2.val if l2 else 0
+            total = v1 + v2 + carry
+            carry = total // 10
+            cur.next = ListNode(total % 10)
+            cur = cur.next
+            if l1: l1 = l1.next
+            if l2: l2 = l2.next
+        return dummy.next
+```
+
+- 用 `v1 = l1.val if l1 else 0`，可以一次 while 走到底
+
+## 445. 两数相加 II
+
+### \#1
+
+```py
+class Solution:
+    def revList(self, l: Optional[ListNode]) -> Optional[ListNode]:
+        prev = None
+        curr = l
+        while curr:
+            next_node = curr.next
+            curr.next = prev
+            prev = curr
+            curr = next_node
+        return prev
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        r1 = self.revList(l1)
+        r2 = self.revList(l2)
+        dummy = ListNode()
+        cur = dummy
+        carry = 0
+        while r1 or r2 or carry:
+            v1 = r1.val if r1 else 0
+            v2 = r2.val if r2 else 0
+            d = v1 + v2 + carry
+            carry = d // 10
+            cur.next = ListNode(d % 10)
+            cur = cur.next
+            if r1: r1 = r1.next
+            if r2: r2 = r2.next
+        return self.revList(dummy.next)
+```
+
+- 综合 反转链表 和 两数相加 的思路，先反转链表，再相加，最后再反转回来
