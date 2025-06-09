@@ -92,6 +92,14 @@
     @apply mx-3 px-4 sm:mx-12 md:mx-16 lg:mx-auto lg:w-[60rem] xl:w-[72rem] 2xl:w-[75rem];
   }
 
+  .header-container:hover .logo-wrapper {
+    background-image: url('/logo2.png');
+  }
+
+  .logo-wrapper {
+    background-image: url('/logo.png');
+  }
+
   .normal-container {
     @apply mx-3 sm:mx-8 md:mx-16 lg:mx-auto lg:w-[44rem] xl:w-[52rem] 2xl:w-[56rem];
   }

@@ -11,10 +11,10 @@ type NavItemProps = { href: string; item: string };
 const Header: FC = () => {
   return (
     <div id='header-wrapper' className='animate-bg-img md:animate-none'>
-      <header className='header-container grid grid-cols-1 md:grid-cols-[auto_1fr] gap-4 items-center justify-items-center md:justify-items-start'>
+      <header className='header-container grid grid-cols-1 items-center justify-items-center md:grid-cols-[auto_1fr] md:justify-items-start'>
         <div className='md:animate-header-left'>
           <Link
-            className='grid grid-cols-[auto_1fr] gap-1 items-center py-1 text-xl'
+            className='mt-4 grid grid-cols-[auto_1fr] items-center text-xl md:mt-2'
             href='/'
           >
             <Logo />
@@ -24,7 +24,7 @@ const Header: FC = () => {
           </Link>
         </div>
         <div className='md:animate-header-right md:justify-self-end'>
-          <div className='grid grid-cols-[auto_auto] gap-1 items-center'>
+          <div className='grid grid-cols-[auto_auto] items-center gap-1'>
             <Navbar>
               <NavbarItem href='/page/1' item='首页' />
               <NavbarItem href='/archives' item='归档' />
@@ -34,7 +34,7 @@ const Header: FC = () => {
             <ul className='grid grid-flow-col items-center text-primary-text'>
               <li className='hover:text-link-hover'>
                 <a
-                  className='grid place-items-center px-2 lg:py-3 cursor-not-allowed'
+                  className='grid cursor-not-allowed place-items-center px-2 lg:py-3'
                   href='/feed.xml'
                   title='RSS (not implemented yet)'
                 >
@@ -60,7 +60,11 @@ const Header: FC = () => {
 };
 
 const Navbar: FC<NodeProps> = ({ children }) => {
-  return <ul className='grid grid-flow-col items-center text-primary-text'>{children}</ul>;
+  return (
+    <ul className='grid grid-flow-col items-center text-primary-text'>
+      {children}
+    </ul>
+  );
 };
 
 const NavbarItem: FC<NavItemProps> = ({ href, item }) => {
@@ -80,9 +84,10 @@ const NavbarItem: FC<NavItemProps> = ({ href, item }) => {
 
 function Logo() {
   return (
-    <div className='logo-wrapper mb-3'>
-      <Image src='/logo.svg' alt='Logo' width='32' height='32' priority />
-    </div>
+    <div
+      className='logo-wrapper -mr-2 -mt-4 h-16 w-16 flex-shrink-0 bg-contain bg-center bg-no-repeat'
+      aria-label='Logo'
+    />
   );
 }
 
