@@ -22,16 +22,16 @@ const TOCRenderer: FC<Props> = async ({ children }) => {
   const mdastRoot = await parseMarkdown.run(parsed);
 
   const headingSlugArray = getHeadingSlugArray(mdastRoot);
-  
+
   if (headingSlugArray.length === 0) {
     return null;
   }
 
   return (
-    <aside id='toc-content' className="w-full">
+    <aside id='toc-content' className='w-full'>
       {/* Desktop TOC - Always visible on large screens */}
       <DesktopTOC headingSlugArray={headingSlugArray} />
-      
+
       {/* Mobile TOC - Collapsible on small screens */}
       <MobileTOC headingSlugArray={headingSlugArray} />
     </aside>

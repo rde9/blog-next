@@ -84,4 +84,4 @@ const DesktopTOC: React.FC<DesktopTOCProps> = ({ headingSlugArray }) => {
   );
 };
 
-export default DesktopTOC; 
+export default DesktopTOC;

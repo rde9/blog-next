@@ -15,11 +15,9 @@ export const generateStaticParams = async () => {
   return slugs.map((slug) => ({ slug }));
 };
 
-export const generateMetadata = async (
-  props: {
-    params: Promise<Params>;
-  }
-): Promise<Metadata> => {
+export const generateMetadata = async (props: {
+  params: Promise<Params>;
+}): Promise<Metadata> => {
   const params = await props.params;
   const post = getPost(params.slug);
 
@@ -56,7 +54,10 @@ const PostPage: FC<{
 
   const sortedPosts = getSortedPosts();
   const currentIndex = sortedPosts.findIndex((p) => p.slug === slug);
-  const previousPost = currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null;
+  const previousPost =
+    currentIndex < sortedPosts.length - 1
+      ? sortedPosts[currentIndex + 1]
+      : null;
   const nextPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
 
   return <Post post={post} previousPost={previousPost} nextPost={nextPost} />;

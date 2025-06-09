@@ -1,11 +1,6 @@
 import type { Metadata } from 'next';
 import { ThemeProvider } from 'next-themes';
-import {
-  Noto_Sans_SC,
-  JetBrains_Mono,
-  Rubik,
-  Fredoka,
-} from 'next/font/google';
+import { Noto_Sans_SC, JetBrains_Mono, Rubik, Fredoka } from 'next/font/google';
 import './globals.css';
 import { SITE_TITLE, SITE_DESCRIPTION, metadataBase } from '@/constants';
 import Header from '@/components/Header';

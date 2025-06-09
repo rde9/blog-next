@@ -9,14 +9,13 @@ type TOCListProps = {
   orientation: 'desktop' | 'mobile';
 };
 
-const TOCList: React.FC<TOCListProps> = ({ 
-  items, 
+const TOCList: React.FC<TOCListProps> = ({
+  items,
   className = '',
   onItemClick,
-  orientation
+  orientation,
 }) => {
   if (items.length === 0) return null;
-
 
   const indentationDesktop = {
     1: 'pl-0 leading-normal',
@@ -30,8 +29,9 @@ const TOCList: React.FC<TOCListProps> = ({
     3: 'pl-10 tracking-tight leading-snug',
   };
 
-  const indentation = orientation === 'desktop' ? indentationDesktop : indentationMobile;
-  
+  const indentation =
+    orientation === 'desktop' ? indentationDesktop : indentationMobile;
+
   const size = {
     1: 'text-lg font-semibold',
     2: 'text-base font-normal',
@@ -44,7 +44,7 @@ const TOCList: React.FC<TOCListProps> = ({
         const level = item.depth as keyof typeof indentation;
         const padding = indentation[level] ?? '';
         const textSize = size[level] ?? '';
-        
+
         return (
           <TOCItem
             key={index}
@@ -59,4 +59,4 @@ const TOCList: React.FC<TOCListProps> = ({
   );
 };
 
-export default TOCList; 
+export default TOCList;
