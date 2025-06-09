@@ -10,11 +10,11 @@ type NavItemProps = { href: string; item: string };
 
 const Header: FC = () => {
   return (
-    <div id='header-wrapper' className='animate-bg-img sm:animate-none'>
-      <header className='header-container flex flex-wrap justify-center sm:justify-between'>
-        <div className='flex basis-full justify-center sm:basis-auto sm:animate-header-left'>
+    <div id='header-wrapper' className='animate-bg-img md:animate-none'>
+      <header className='header-container grid grid-cols-1 md:grid-cols-[auto_1fr] gap-4 items-center justify-items-center md:justify-items-start'>
+        <div className='md:animate-header-left'>
           <Link
-            className='flex flex-nowrap items-end gap-1 py-1 text-xl sm:items-center'
+            className='grid grid-cols-[auto_1fr] gap-1 items-center py-1 text-xl'
             href='/'
           >
             <Logo />
@@ -23,34 +23,36 @@ const Header: FC = () => {
             </span>
           </Link>
         </div>
-        <div className='flex flex-wrap justify-center gap-1 sm:animate-header-right sm:justify-between'>
-          <Navbar>
-            <NavbarItem href='/page/1' item='首页' />
-            <NavbarItem href='/archives' item='归档' />
-            <NavbarItem href='/tags' item='标签' />
-            <NavbarItem href='/about' item='关于' />
-          </Navbar>
-          <ul className='flex items-stretch text-primary-text'>
-            <li className='flex hover:text-link-hover'>
-              <a
-                className='flex cursor-not-allowed items-center px-2 lg:py-3'
-                href='/feed.xml'
-                title='RSS (not implemented yet)'
-              >
-                <Rss />
-              </a>
-            </li>
-            <li className='flex hover:text-link-hover'>
-              <a
-                className='flex items-center px-2 lg:py-3'
-                href='/search'
-                title='搜索'
-              >
-                <SearchIcon />
-              </a>
-            </li>
-            <ThemeSwitcher />
-          </ul>
+        <div className='md:animate-header-right md:justify-self-end'>
+          <div className='grid grid-cols-[auto_auto] gap-1 items-center'>
+            <Navbar>
+              <NavbarItem href='/page/1' item='首页' />
+              <NavbarItem href='/archives' item='归档' />
+              <NavbarItem href='/tags' item='标签' />
+              <NavbarItem href='/about' item='关于' />
+            </Navbar>
+            <ul className='grid grid-flow-col items-center text-primary-text'>
+              <li className='hover:text-link-hover'>
+                <a
+                  className='grid place-items-center px-2 lg:py-3 cursor-not-allowed'
+                  href='/feed.xml'
+                  title='RSS (not implemented yet)'
+                >
+                  <Rss />
+                </a>
+              </li>
+              <li className='hover:text-link-hover'>
+                <a
+                  className='grid place-items-center px-2 lg:py-3'
+                  href='/search'
+                  title='搜索'
+                >
+                  <SearchIcon />
+                </a>
+              </li>
+              <ThemeSwitcher />
+            </ul>
+          </div>
         </div>
       </header>
     </div>
@@ -58,15 +60,15 @@ const Header: FC = () => {
 };
 
 const Navbar: FC<NodeProps> = ({ children }) => {
-  return <ul className='flex items-stretch text-primary-text'>{children}</ul>;
+  return <ul className='grid grid-flow-col items-center text-primary-text'>{children}</ul>;
 };
 
 const NavbarItem: FC<NavItemProps> = ({ href, item }) => {
   return (
-    <li className='flex'>
+    <li>
       <Link
         href={href}
-        className='group flex items-center px-2 text-lg hover:text-link-hover lg:px-3 lg:py-3'
+        className='group grid place-items-center px-2 text-lg hover:text-link-hover lg:px-3 lg:py-3'
       >
         <span className='bg-gradient-to-l from-link-hover to-link-hover bg-[length:0px_2px] bg-right-bottom bg-no-repeat py-2 transition-bg-size duration-300 group-hover:bg-[length:100%_2px] group-hover:bg-left-bottom'>
           {item}
@@ -78,7 +80,7 @@ const NavbarItem: FC<NavItemProps> = ({ href, item }) => {
 
 function Logo() {
   return (
-    <div className='logo-wrapper sm:mb-3'>
+    <div className='logo-wrapper mb-3'>
       <Image src='/logo.svg' alt='Logo' width='32' height='32' priority />
     </div>
   );
