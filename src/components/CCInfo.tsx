@@ -10,9 +10,8 @@ type Props = {
 // export const CCInfo: React.FC<Props> = ({ title, description, imageUrl }) => {
 export const CCInfo: React.FC<Props> = ({ imageUrl }) => {
   return (
-    <div className='not-prose flex w-full flex-row gap-6 overflow-hidden bg-bg-card px-4 dark:py-4'>
-      {/* 左侧文本内容 */}
-      <div className='flex flex-1'>
+    <div className='not-prose grid w-full grid-cols-1 gap-6 overflow-hidden rounded-xl bg-bg-card px-4 dark:py-4 md:grid-cols-[2.5fr_1fr]'>
+      <div className='flex'>
         <div className='flex flex-col space-y-2 break-words pb-2 text-sm text-secondary-text'>
           <p className='line-clamp-2 break-words text-xl font-semibold text-primary-text'>
             版权声明
@@ -42,17 +41,14 @@ export const CCInfo: React.FC<Props> = ({ imageUrl }) => {
           </p>
         </div>
       </div>
-      {/* 右侧图片 */}
       {imageUrl && (
-        <div className='hidden max-w-[2/5] items-center sm:flex'>
-          <div className='h-48'>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              className='dark:img-dark-filter left-2 h-full w-full object-cover'
-              src={imageUrl}
-              alt=''
-            />
-          </div>
+        <div className='hidden items-center md:flex'>
+          <div
+            className={`h-48 w-full bg-contain bg-center bg-no-repeat dark:[filter:brightness(0.8)_contrast(1.2)]`}
+            style={{
+              backgroundImage: `url(${imageUrl})`,
+            }}
+          />
         </div>
       )}
     </div>
