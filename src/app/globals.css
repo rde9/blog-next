@@ -92,12 +92,27 @@
     @apply mx-3 px-4 sm:mx-12 md:mx-16 lg:mx-auto lg:w-[60rem] xl:w-[72rem] 2xl:w-[75rem];
   }
 
-  .header-container:hover .logo-wrapper {
-    background-image: url('/logo2.png');
+  .logo-wrapper {
+    background-image: url('/logo-sprite.png');
+    background-position: 0 0;
   }
 
-  .logo-wrapper {
-    background-image: url('/logo.png');
+  .logo-container:hover .logo-wrapper {
+    background-position: 0 -4rem;
+  }
+
+  .logo-container:hover .logo-text {
+    @apply text-gray-50 dark:text-primary-600;
+    &::before {
+      @apply origin-top-left scale-x-100;
+    }
+  }
+
+  .logo-text {
+    @apply relative z-10 px-1 font-fredoka text-2xl font-medium text-link transition-colors duration-500 dark:text-primary-text;
+    &::before {
+      @apply absolute inset-0 -z-10 my-auto origin-top-right scale-x-0 bg-link transition-transform duration-500 content-[''] dark:bg-primary-text;
+    }
   }
 
   .normal-container {
